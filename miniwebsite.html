@@ -1,0 +1,2134 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>Mini Website</title>
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/assets/images/favicon.ico"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/assets/images/favicon.ico"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/assets/images/favicon.ico"
+        />
+        <link rel="manifest" href="/assets/images/favicon.ico" />
+
+        <!-- Google Font -->
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400..800&family=Baloo+Bhaina+2:wght@400..800&family=Barlow:wght@400;500;600;700;800;900&display=swap"
+        />
+        <link rel="stylesheet" href="/assets/css/font-awesome.css" />
+        <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+
+        <link rel="stylesheet" href="/assets/css/owl.carousel.min.css" />
+        <link rel="stylesheet" href="/assets/css/owl.theme.default.css" />
+        <link rel="stylesheet" href="/assets/css/animate.css" />
+        <link rel="stylesheet" href="/assets/css/layout.css" />
+        <link rel="stylesheet" href="/assets/css/responsive.css" />
+        <link rel="stylesheet" href="/assets/css/captcha.css" />
+    </head>
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg px-3">
+                <div class="container">
+                    <a class="navbar-brand" href="/">
+                        <img
+                            class="img-fluid"
+                            src="/assets/images/main-logo.png"
+                            alt="logo"
+                        />
+                    </a>
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <img
+                            src="/assets/images/navbar-img.png"
+                            alt="Menu"
+                            width="30"
+                            height="30"
+                            class="img-fluid"
+                        />
+                    </button>
+                    <div
+                        class="collapse navbar-collapse"
+                        id="navbarSupportedContent"
+                    >
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a
+                                    class="nav-link DemoSamples"
+                                    href="javascript:void(0)"
+                                    >Demo Samples</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link OurPlans"
+                                    href="javascript:void(0)"
+                                    >Our Plans</a
+                                >
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle btn-primary"
+                                    href="#"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Earn With Us
+                                    <i class="fa fa-angle-double-down"></i>
+                                </a>
+                                <div class="dropdown-menu scrollable-dropdown">
+                                    <a
+                                        class="dropdown-item"
+                                        href="/refer-and-earn.php"
+                                        >Refer & Earn</a
+                                    >
+                                    <a
+                                        class="dropdown-item"
+                                        href="/franchisee.php"
+                                    >
+                                        Franchise Partner</a
+                                    >
+                                </div>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Login
+                                    <i class="fa fa-angle-double-down"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a
+                                        class="dropdown-item"
+                                        href="/login/customer.php"
+                                        >Customer Login</a
+                                    >
+                                    <a
+                                        class="dropdown-item"
+                                        href="/login/franchisee.php"
+                                        >Franchise Login</a
+                                    >
+                                    <a
+                                        class="dropdown-item"
+                                        href="/login/team.php"
+                                        >Team Login</a
+                                    >
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- JavaScript (dynamic paths + use files that exist in this repo) -->
+        <script src="/assets/js/jquery.slim.min.js"></script>
+        <script>
+            // jQuery fallback (some pages still use it)
+            if (!window.jQuery) {
+                document.write(
+                    '<script src="https://code.jquery.com/jquery-3.6.0.min.js"><\/script>',
+                );
+            }
+        </script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Bootstrap fallback (optional)
+            if (
+                !window.bootstrap &&
+                !(
+                    window.jQuery &&
+                    window.jQuery.fn &&
+                    window.jQuery.fn.dropdown
+                )
+            ) {
+                document.write(
+                    '<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"><\/script>',
+                );
+            }
+        </script>
+
+        <style>
+            /* Scrollable dropdown styles for main header */
+            .scrollable-dropdown {
+                max-height: 300px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                scrollbar-width: thin;
+                scrollbar-color: #6c757d #f8f9fa;
+            }
+
+            .scrollable-dropdown::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .scrollable-dropdown::-webkit-scrollbar-track {
+                background: #f8f9fa;
+                border-radius: 3px;
+            }
+
+            .scrollable-dropdown::-webkit-scrollbar-thumb {
+                background: #6c757d;
+                border-radius: 3px;
+            }
+
+            .scrollable-dropdown::-webkit-scrollbar-thumb:hover {
+                background: #495057;
+            }
+
+            .scrollable-dropdown .dropdown-item {
+                padding: 8px 15px;
+
+                transition: all 0.2s ease;
+            }
+
+            .scrollable-dropdown .dropdown-item i {
+                margin-right: 8px;
+                width: 16px;
+                text-align: center;
+            }
+        </style>
+
+        <script>
+            // Dropdown functionality for main header (NO jQuery required)
+            (function () {
+                function closeAllDropdowns() {
+                    document
+                        .querySelectorAll(".navbar .dropdown-menu.show")
+                        .forEach(function (m) {
+                            m.classList.remove("show");
+                        });
+                }
+
+                // Toggle dropdowns on click
+                document
+                    .querySelectorAll(
+                        ".navbar .nav-item.dropdown > .dropdown-toggle",
+                    )
+                    .forEach(function (toggle) {
+                        toggle.addEventListener("click", function (e) {
+                            e.preventDefault();
+
+                            var menu = toggle.nextElementSibling;
+                            if (
+                                !menu ||
+                                !menu.classList.contains("dropdown-menu")
+                            )
+                                return;
+
+                            // close others
+                            document
+                                .querySelectorAll(".navbar .dropdown-menu.show")
+                                .forEach(function (m) {
+                                    if (m !== menu) m.classList.remove("show");
+                                });
+
+                            menu.classList.toggle("show");
+                        });
+                    });
+
+                // Close when clicking a dropdown item
+                document
+                    .querySelectorAll(".navbar .dropdown-menu .dropdown-item")
+                    .forEach(function (item) {
+                        item.addEventListener("click", function () {
+                            var menu = item.closest(".dropdown-menu");
+                            if (menu) menu.classList.remove("show");
+                        });
+                    });
+
+                // Close on outside click
+                document.addEventListener("click", function (e) {
+                    if (!e.target.closest(".navbar .nav-item.dropdown")) {
+                        closeAllDropdowns();
+                    }
+                });
+
+                // Close on escape
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") closeAllDropdowns();
+                });
+
+                // Smooth scrolling inside scrollable dropdowns
+                document
+                    .querySelectorAll(".scrollable-dropdown")
+                    .forEach(function (dd) {
+                        dd.addEventListener(
+                            "wheel",
+                            function (e) {
+                                e.preventDefault();
+                                dd.scrollTop += e.deltaY;
+                            },
+                            { passive: false },
+                        );
+                    });
+            })();
+        </script>
+
+        <main>
+            <section class="banner">
+                <div class="container">
+                    <div class="banner-wrap">
+                        <div class="banner-content">
+                            <h1 class="heading">
+                                Create your <span>MINI WEBSITE</span>
+                            </h1>
+                            <p>
+                                Your business deserves a powerful online
+                                presence that captures attention, drives
+                                engagement, and converts visitors into loyal
+                                customers.
+                            </p>
+                            <ul>
+                                <li>
+                                    Are you struggling to have an online
+                                    presence?
+                                </li>
+                                <li>Do you still use paper visiting cards?</li>
+                            </ul>
+                            <button
+                                class="btn btn-primary d-lg-block d-none"
+                                onclick="
+                                    window.location.href = 'login/customer.php'
+                                "
+                            >
+                                <a
+                                    href="login/customer.php"
+                                    target="_blank"
+                                    style="text-decoration: none"
+                                >
+                                    CREATE YOUR MINI WEBSITE
+                                </a>
+                            </button>
+                        </div>
+                        <div class="banner-img">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/01Page01/Image.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="banner-content d-lg-none d-md-block">
+                            <button class="btn btn-primary">
+                                <a
+                                    href="login/customer.php"
+                                    target="_blank"
+                                    style="
+                                        text-decoration: none;
+                                        color: #002169;
+                                    "
+                                >
+                                    CREATE YOUR MINI WEBSITE
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="how-web-works">
+                <div class="container">
+                    <div class="web-works">
+                        <h2 class="heading">How Mini Website Works ?</h2>
+                        <div class="web-works-card">
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/02HowMiniWebsiteWork/create_01.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">
+                                    CREATE YOUR <span>MINI WEBSITE</span>
+                                </h3>
+                                <p>
+                                    Create your Mini Website within minutes with
+                                    impressive rich content & design.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/02HowMiniWebsiteWork/share_02.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">
+                                    SHARE YOUR <span>MINI WEBSITE</span>
+                                </h3>
+                                <p>
+                                    You can share your Mini Website from
+                                    anywhere & anytime.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/02HowMiniWebsiteWork/growth_11462571.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">
+                                    SUCCEED WITH <span>MINI WEBSITE</span>
+                                </h3>
+                                <p>
+                                    Attract more customers and boost your online
+                                    presence with a professional Mini Website.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="demo-samples">
+                <div class="container">
+                    <div class="demo-samples-wrap">
+                        <div class="demo-heading-wrap">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/03Miniwebsitesamples/phone.png"
+                                alt=""
+                            />
+                            <h2 class="heading">Mini Website Samples</h2>
+                        </div>
+                        <div
+                            class="screenshots-carousel owl-carousel owl-theme"
+                        >
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/01.png"
+                                    alt=""
+                                />
+
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Kaka-furnitures"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/02.png"
+                                    alt=""
+                                />
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Business-Assistant-"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/03.png"
+                                    alt=""
+                                />
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Ajay-Electronics"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/04.png"
+                                    alt=""
+                                />
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Riya-Beauty-Parlour"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/05.png"
+                                    alt=""
+                                />
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Agrawal-insurance"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/06.png"
+                                    alt=""
+                                />
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Money-India-Pvt-Ltd-"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="screenshots">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/03Miniwebsitesamples/07.png"
+                                    alt=""
+                                />
+                                <button class="btn btn-primary">
+                                    <a
+                                        href="https://miniwebsite.in/n.php?n=Dinesh-masale"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        VIEW DEMO
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="Website-Features">
+                <div class="container">
+                    <div class="Website-FeaturesWrap">
+                        <h2 class="heading">Our Mini Website Features</h2>
+                        <div class="WebsiteFeatures">
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/01Clickcall.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Click to Call</h3>
+                                <p>
+                                    Your customers can contact you instantly by
+                                    simply tapping on the call icon on your Mini
+                                    Website.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/02Clickwhatsapp.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Click To WhatsApp</h3>
+                                <p>
+                                    Through this Mini Website, your customers
+                                    can WhatsApp you directly without saving
+                                    your number.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/03Clickemail.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Click to Email</h3>
+                                <p>
+                                    Your customers can send you an email with
+                                    just one click directly from the Mini
+                                    Website.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/04GetDirection.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Get Directions</h3>
+                                <p>
+                                    People can navigate to your store using
+                                    Google Maps from the Mini Website.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/05savecontact.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Save to Contacts</h3>
+                                <p>
+                                    People can store all your contact
+                                    information in their phone.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/06website.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">
+                                    Website & Social Links
+                                </h3>
+                                <p>
+                                    Customers can visit your website and social
+                                    media pages through the Mini Website.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/07share.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Unlimited Share</h3>
+                                <p>
+                                    You can share your Mini Website as many
+                                    times as you like on social media and
+                                    WhatsApp.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/08easy.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Easy To Update</h3>
+                                <p>
+                                    You can change your details anytime as many
+                                    times as you want.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/09photogallery.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Photo Gallery</h3>
+                                <p>
+                                    You can display your business realted images
+                                    to your customers.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/10Youtubevideos.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Youtube Videos</h3>
+                                <p>
+                                    Capture your customers' attention by
+                                    featuring your business YouTube videos on
+                                    your Mini Website.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/11Payment.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Payment Info</h3>
+                                <p>
+                                    Display your payment options to customers,
+                                    such as Paytm, PhonePe, Google Pay, and bank
+                                    account details (including QR code).
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/12E-commerce.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">E-commerce</h3>
+                                <p>
+                                    List your products or services with price in
+                                    your Mini Website.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/13qr-code-scan.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">QR Scan</h3>
+                                <p>
+                                    Get a QR scan code of your Mini Website to
+                                    enhance your online presence.
+                                </p>
+                            </div>
+                            <div class="cards">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/04OurMiniwebsiteFeatures/14visits.png"
+                                    alt=""
+                                />
+                                <h3 class="card-heading">Visitation</h3>
+                                <p>
+                                    You can track the number of unique visitors
+                                    on your Mini Website.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="go-digital">
+                <div class="container">
+                    <div class="go-digital-wrap">
+                        <h2 class="heading">Go Digital</h2>
+                        <div class="info-card-wrap">
+                            <div class="info-card purple">
+                                <div>
+                                    <h3>
+                                        Say Goodbye to
+                                        <span>Paper Visiting Cards</span>
+                                    </h3>
+                                    <p>
+                                        Paper visiting cards are usually thrown
+                                        away in dustbin, and no one cares about
+                                        them.
+                                    </p>
+                                </div>
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/05GoDigital/01.png"
+                                    alt="Trash bin"
+                                />
+                            </div>
+
+                            <div class="info-card red">
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/05GoDigital/02.png"
+                                    alt="Mini Website"
+                                />
+                                <div>
+                                    <h3>Use Mini Website</h3>
+                                    <p>
+                                        It’s convenient, super affordable, and
+                                        hassle-free.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="info-card orange">
+                                <div>
+                                    <h3>Get More Attention</h3>
+                                    <p>
+                                        You can get more attention than before.
+                                        More attention means more customers,
+                                        more profits.
+                                    </p>
+                                </div>
+                                <img
+                                    class="img-fluid"
+                                    src="assets/images/05GoDigital/03.png"
+                                    alt="More Attention"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="why-miniweb">
+                <div class="container">
+                    <h2 class="heading">Why MiniWebsite.in?</h2>
+                    <div class="features-container">
+                        <div class="feature-box">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/05AWhyMiniwebsite/01_LaunchMinutes.gif"
+                                alt="Create in Minutes"
+                            />
+                            <span class="feature-text">Create in Minutes</span>
+                        </div>
+                        <div class="feature-box">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/05AWhyMiniwebsite/02_Notechnicalskills.gif"
+                                alt="No Technical Skills Required"
+                            />
+                            <span class="feature-text"
+                                >No Technical Skills Required</span
+                            >
+                        </div>
+                        <div class="feature-box feature-box3">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/05AWhyMiniwebsite/03_ReadyToUse.gif"
+                                alt="Ready To Use Templates"
+                            />
+                            <span class="feature-text"
+                                >Ready To Use Templates</span
+                            >
+                        </div>
+                        <div class="feature-box feature-box4">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/05AWhyMiniwebsite/04_MobileFriendly.gif"
+                                alt="Mobile Friendly"
+                            />
+                            <span class="feature-text"
+                                >Mobile <br />
+                                Friendly</span
+                            >
+                        </div>
+                        <div class="feature-box">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/05AWhyMiniwebsite/05_Affordable.gif"
+                                alt="Affordable Pricing"
+                            />
+                            <span class="feature-text">Affordable Pricing</span>
+                        </div>
+                        <div class="feature-box">
+                            <img
+                                class="img-fluid"
+                                src="assets/images/05AWhyMiniwebsite/06_Reliable_support_17905424.gif"
+                                alt="Reliable Support"
+                            />
+                            <span class="feature-text">Reliable Support</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pricing" id="pricing">
+                <div class="container">
+                    <h2 class="heading">Choose Your Plan</h2>
+                    <div class="pricing-container">
+                        <!-- Beginner Plan -->
+                        <div class="pricing-card">
+                            <div class="card purple-light">
+                                <h3 class="plan-1">Beginner Plan</h3>
+
+                                <p class="price">FREE</p>
+                                <p class="trail"><span>For 7 days</span></p>
+                                <p class="price">
+                                    <small>(For Each User)</small>
+                                </p>
+
+                                <button
+                                    class="btn-plan btn btn-primary"
+                                    onclick="
+                                        window.location.href =
+                                            'login/customer.php'
+                                    "
+                                >
+                                    <a
+                                        href="login/customer.php"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        GET PLAN
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <ul>
+                                    <li>Check Visitors Count</li>
+                                    <li>60+ impressive themes</li>
+                                    <li>Create Complete Profile</li>
+                                    <li>Click to Call</li>
+                                    <li>Click to Email</li>
+                                    <li>Click to WhatsApp</li>
+                                    <li>Connect all Social Links</li>
+                                    <li>Share Mini Website QR Code</li>
+                                    <li>Add Products with Prices</li>
+                                    <li>Add Services</li>
+                                    <li>Add Videos</li>
+                                    <li>Add Payment Details</li>
+                                    <li>Unlimited Share</li>
+                                    <li>Update Details Anytime</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Team Plan -->
+                        <div class="pricing-card">
+                            <div class="card red">
+                                <h3 class="plan-1">Professional Plan</h3>
+                                <p class="old-price">Rs 2000/-</p>
+                                <p class="price">
+                                    Rs 999/- <sub>per year</sub
+                                    ><small>(For Each MiniWebsite)</small>
+                                </p>
+
+                                <button
+                                    class="btn-plan btn btn-primary"
+                                    onclick="
+                                        window.location.href =
+                                            'login/customer.php'
+                                    "
+                                >
+                                    <a
+                                        href="login/customer.php"
+                                        target="_blank"
+                                        style="
+                                            text-decoration: none;
+                                            color: #002169;
+                                        "
+                                    >
+                                        GET PLAN
+                                    </a>
+                                </button>
+                            </div>
+                            <div class="card-content">
+                                <ul>
+                                    <li>Check Visitors Count</li>
+                                    <li>60+ impressive themes</li>
+                                    <li>Create Complete Profile</li>
+                                    <li>Click to Call</li>
+                                    <li>Click to Email</li>
+                                    <li>Click to WhatsApp</li>
+                                    <li>Connect all Social Links</li>
+                                    <li>Share Mini Website QR Code</li>
+                                    <li>Add Products with Prices</li>
+                                    <li>Add Services</li>
+                                    <li>Add Videos</li>
+                                    <li>Add Payment Details</li>
+                                    <li>Unlimited Share</li>
+                                    <li>Update Details Anytime</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Enterprise Plan -->
+                        <!-- <div class="pricing-card">
+                        <div class="card orange">
+                            <h3 class="plan-1">Enterprise Plan
+                                <small>(For Above 50 Members)</small>
+                            </h3>
+
+                            <p class="price">Custom Pricing</p>
+                            <button class="btn-plan btn btn-primary">TALK TO US</button>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li>You can create Mini Website</li>
+                                <li>Create Mini Website for your team</li>
+                                <li>Check Visitors Count</li>
+                                <li>60+ impressive themes</li>
+                                <li>Create Complete Profile</li>
+                                <li>Click to WhatsApp</li>
+                                <li>Add Products with Prices</li>
+                                <li>Unlimited Share</li>
+                                <li>Update Details Anytime</li>
+                            </ul>
+                        </div>
+                    </div> -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="textimonial">
+                <div class="container">
+                    <div class="textimonial-wrap">
+                        <h2 class="heading">What Our Customer Says</h2>
+                        <div
+                            class="testimonial-carousel owl-carousel owl-theme"
+                            id="testimonial-carousel"
+                        >
+                            <div class="testimonial-card">
+                                <img
+                                    src="assets/images/07Testimonials/01.png"
+                                    alt="Rahul Mehra"
+                                />
+                                <h3>
+                                    <strong>Rahul Mehra</strong>(Mehra
+                                    Consulting)
+                                </h3>
+
+                                <div class="testimonial-text">
+                                    "Mini Website transformed our online
+                                    presence effortlessly! Their design and
+                                    speed are unmatched!"
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card">
+                                <img
+                                    src="assets/images/07Testimonials/02.png"
+                                    alt="Priya Sharma"
+                                />
+                                <h3>
+                                    <strong>Priya Sharma</strong>(Art Haven)
+                                </h3>
+
+                                <div class="testimonial-text">
+                                    "Incredible service! The team delivered a
+                                    stunning website that perfectly fits our
+                                    brand."
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <img
+                                    src="assets/images/07Testimonials/03.png"
+                                    alt="Amit Gupta"
+                                />
+                                <h3>
+                                    <strong>Amit Gupta</strong>(Gupta Groceries)
+                                </h3>
+
+                                <div class="testimonial-text">
+                                    "Highly professional and efficient. Mini
+                                    Website made creating a website hassle-free
+                                    and affordable for our small business."
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <img
+                                    src="assets/images/07Testimonials/04.png"
+                                    alt="Sneha Kapoor"
+                                />
+                                <h3>
+                                    <strong>Sneha Kapoor</strong>(Eventify
+                                    Solutions)
+                                </h3>
+
+                                <div class="testimonial-text">
+                                    "Mini Website delivered a sleek,
+                                    user-friendly website in no time! Truly a
+                                    game-changer for our business."
+                                </div>
+                            </div>
+                            <div class="testimonial-card">
+                                <img
+                                    src="assets/images/07Testimonials/05.jpg"
+                                    alt="Rahul Mehra"
+                                />
+                                <h3>
+                                    <strong>Riya Ahuja</strong>(Riya beauty
+                                    parlour)
+                                </h3>
+
+                                <div class="testimonial-text">
+                                    "No fluff, just results. Got exactly what I
+                                    needed-fast, good-looking, and reliable."
+                                </div>
+                            </div>
+
+                            <div class="testimonial-card">
+                                <img
+                                    src="assets/images/07Testimonials/06.jpg"
+                                    alt="Priya Sharma"
+                                />
+                                <h3>
+                                    <strong>Ajay Gupta</strong>(Ajay
+                                    electronics)
+                                </h3>
+
+                                <div class="testimonial-text">
+                                    "Perfect for small businesses like mine.
+                                    Fast, affordable, and
+                                    user-friendly-everything I needed in one
+                                    place."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="franchise">
+                <div class="container">
+                    <div class="franchise-section">
+                        <img
+                            src="assets/images/08Lookingfornewwaystowork/01.png"
+                            alt="Franchise"
+                            class="franchise-img"
+                        />
+                        <div class="franchise-text">
+                            <div class="text">
+                                <h2>
+                                    Looking For New Ways to Earn? <span></span>
+                                </h2>
+                            </div>
+                            <h5>
+                                Partner with us and launch your own Mini Website
+                                business with our trusted Franchise model.
+                            </h5>
+                            <br />
+                            <a href="franchisee.php" class="btn btn-primary"
+                                >GET YOUR FRANCHISE</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="faq">
+                <div class="container">
+                    <h2 class="heading">Frequently Asked Questions (FAQ)</h2>
+                    <link rel="stylesheet" href="frontend_faq_styles.css" />
+                    <div class="faq-container" id="faqAccordion">
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq1"
+                                    >
+                                        1. What is a Mini Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq1"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        MiniWebsite is an affordable digital
+                                        enablement platform that helps every
+                                        business, professional and entrepreneur
+                                        create a professional online presence
+                                        using mini websites with a direct
+                                        WhatsApp inquiry system.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq2"
+                                    >
+                                        2. Is MiniWebsite.in suitable for small
+                                        businesses and freelancers?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq2"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        Yes, Miniwebsite.in is specially
+                                        designed for small businesses,
+                                        professionals, and freelancers looking
+                                        for a fast, cost-effective way to build
+                                        their online presence. Whether you run a
+                                        local shop, offer consulting, or provide
+                                        creative services, a mini website from
+                                        Miniwebsite.in helps you connect with
+                                        more customers and grow your business
+                                        online, no technical setup or large
+                                        investment needed.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq3"
+                                    >
+                                        3. Is technical expertise required to
+                                        build a Mini Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq3"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        No, no coding or technical skills are
+                                        required. Miniwebsite.in makes it simple
+                                        for anyone to create their mini website
+                                        in minutes, choose a template, add your
+                                        details, and you're ready to launch. Our
+                                        user-friendly platform is designed for
+                                        business owners and professionals who
+                                        want a hassle-free, mobile-friendly
+                                        online identity.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq4"
+                                    >
+                                        4. Is there a free trial available?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq4"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Yes, miniwebsite.in offers 7 days free
+                                    trial, so you can try out the full range of
+                                    features before making a commitment.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq5"
+                                    >
+                                        5. Can I customize my Mini Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq5"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        Absolutely. MiniWebsite.in provides a
+                                        range of customization options so your
+                                        mini website truly reflects your
+                                        business identity and appeals to your
+                                        customers. You can change images, and
+                                        layout, ensuring your Mini Website
+                                        aligns with your business aesthetics and
+                                        appeals to your target audience.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq6"
+                                    >
+                                        6. What features are included in a Mini
+                                        Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq6"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        MiniWebsite.in offers a comprehensive
+                                        suite of features to enhance your
+                                        digital presence:<br /><strong
+                                            >Click-to-Call:</strong
+                                        >
+                                        Enable visitors to contact you directly
+                                        with a single tap.<br /><strong
+                                            >Click-to-WhatsApp:</strong
+                                        >
+                                        Enable instant messaging for fast
+                                        customer support and inquiries.<br /><strong
+                                            >Email Links:</strong
+                                        >
+                                        Let users send emails directly from your
+                                        mini website, no need to copy or
+                                        remember an address.<br /><strong
+                                            >Get Direction:</strong
+                                        >
+                                        Share your business location using
+                                        Google Maps.<br /><strong
+                                            >Save to Contacts:</strong
+                                        >
+                                        Customers can save your details to their
+                                        phone instantly.<br /><strong
+                                            >Social Media Links:</strong
+                                        >
+                                        Connect your audience to your social
+                                        profiles.<br />Photo Gallery &amp; Video
+                                        Embeds: Showcase your work or products
+                                        visually.<br /><strong
+                                            >Product Listings with
+                                            Pricing:</strong
+                                        >
+                                        Display your offerings clearly.<br />Payment
+                                        Information: Share payment options like
+                                        Paytm, PhonePe, Google Pay, and bank
+                                        details.<br /><strong
+                                            >QR Code Generation:</strong
+                                        >
+                                        Simplify sharing your website offline.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq7"
+                                    >
+                                        7. Can I list products or services on my
+                                        Mini Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq7"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Yes, you can showcase your products or
+                                    services complete with pricing. This feature
+                                    is perfect for small businesses,
+                                    freelancers, and professionals who want to
+                                    promote what they offer and make it easy for
+                                    customers to shop or inquire directly.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq8"
+                                    >
+                                        8. Can I update my Mini Website after
+                                        publishing?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq8"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Certainly. MiniWebsite.in allows you to make
+                                    unlimited updates to your website at any
+                                    time. Whether you're adding new products,
+                                    updating contact information, or refreshing
+                                    your content, you have full control to keep
+                                    your website current and relevant.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq9"
+                                    >
+                                        9. How can I share my Mini Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq9"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Sharing your mini website is quick and
+                                    straightforward. You can send it via
+                                    WhatsApp, email, social media, or even
+                                    generate a QR code for offline promotion.
+                                    This versatility ensures that your digital
+                                    presence is easily accessible to your
+                                    audience wherever they are.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq10"
+                                    >
+                                        10. How does the QR code feature work?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq10"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Upon creating your Mini Website, a unique QR
+                                    code is generated. This code can be printed
+                                    on business cards, flyers, or displayed in
+                                    your physical store, allowing users to scan
+                                    and access your website instantly, bridging
+                                    the gap between offline and online
+                                    engagement.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq11"
+                                    >
+                                        11. Is my Mini Website mobile-friendly?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq11"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Yes, all Mini Websites are optimized for
+                                    mobile devices. The responsive design
+                                    ensures that your website looks and
+                                    functions seamlessly across smartphones,
+                                    tablets, and desktops, providing an optimal
+                                    user experience regardless of the device
+                                    used.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq12"
+                                    >
+                                        12. Can I link my mini website to Google
+                                        Business Profile?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq12"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Yes, you can easily connect your mini
+                                    website to your Google Business Profile.
+                                    This improves your local SEO, helps you
+                                    appear in local searches, and builds more
+                                    credibility with potential customers.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq13"
+                                    >
+                                        13. How can I create my Mini Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq13"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Creating your Mini Website is
+                                    straightforward. Simply sign up on
+                                    MiniWebsite.in, choose from given templates,
+                                    and input your business details, including
+                                    contact information, services, products, and
+                                    multimedia content. No technical skills are
+                                    required, making it accessible for anyone
+                                    looking to establish an online presence
+                                    quickly.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq14"
+                                    >
+                                        14. How Is a Mini Website Different from
+                                        a Traditional Website?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq14"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        A traditional website is usually large,
+                                        multi-page, and designed for complex
+                                        functionality like blogs, user logins,
+                                        product catalogs, and advanced
+                                        integrations. It often requires
+                                        professional development, hosting setup,
+                                        and ongoing maintenance.<br />In
+                                        contrast, a mini website is a
+                                        simplified, single-page or small-scale
+                                        website focused on showcasing essential
+                                        information like your business profile,
+                                        contact details, services, products, and
+                                        social links. Miniwebsite.in are ideal
+                                        for professionals, small businesses, and
+                                        freelancers who need a fast, affordable,
+                                        and mobile-friendly online presence,
+                                        without the need for coding or high
+                                        costs.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq15"
+                                    >
+                                        15. What Are the Pricing Plans for
+                                        MiniWebsite.in?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq15"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    <p>
+                                        MiniWebsite.in provides two pricing
+                                        options:<br /><strong
+                                            >Beginner Plan:</strong
+                                        >
+                                        Free for 7 days, offering access to all
+                                        features to get you started.<br /><strong
+                                            >Professional Plan:</strong
+                                        >
+                                        Priced at ₹999 per year, this plan
+                                        includes full access to all features,
+                                        allowing for a comprehensive and
+                                        professional online presence.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="card-header p-2">
+                                <h5 class="mb-0">
+                                    <button
+                                        class="btn btn-link collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#faq16"
+                                    >
+                                        16. Is customer support available?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div
+                                id="faq16"
+                                class="collapse"
+                                data-parent="#faqAccordion"
+                            >
+                                <div class="card-body">
+                                    Yes, we provide reliable customer support to
+                                    help you with any questions or issues you
+                                    may have. You can reach out to our support
+                                    team through the contact information
+                                    provided on our website.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <button onclick="scrollToTop()" id="backToTop">
+            <img
+                src="assets/images/arrow.png"
+                class="img-fluid"
+                width="30"
+                alt=""
+            />
+        </button>
+        <div class="fixd-said">
+            <!-- Call Button -->
+            <a
+                href="https://wa.me/919429693574"
+                target="_blank"
+                id="whatsapp-btn"
+            >
+                <img
+                    src="assets/images/whatsapp.png"
+                    class="img-fluid"
+                    width="30"
+                    alt="WhatsApp"
+                />
+            </a>
+
+            <!-- Call Button -->
+            <a href="tel:+91-9429693574" id="call-btn">
+                <img
+                    src="assets/images/phone.png"
+                    class="img-fluid"
+                    width="30"
+                    alt="Call"
+                />
+            </a>
+        </div>
+
+        <footer class="footer">
+            <section class="main-foot">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-section">
+                                <img
+                                    class="img-fluid footer-logo"
+                                    src="assets/images/09Footer/Miniwebsite logo_1800x.png"
+                                    alt="miniwebsite.in"
+                                />
+
+                                <p class="contact-info">
+                                    <a href="tel:+91-9429693574"
+                                        ><img
+                                            class="img-fluid"
+                                            src="assets/images/09Footer/foot-call.png"
+                                            alt=""
+                                        />
+                                        +91-9429693574</a
+                                    >
+                                </p>
+                                <p class="contact-info">
+                                    <a href="mailto:support@miniwebsite.in"
+                                        ><img
+                                            class="img-fluid"
+                                            src="assets/images/09Footer/foot-mail.png"
+                                            alt=""
+                                        />
+                                        support@miniwebsite.in</a
+                                    >
+                                </p>
+                                <p class="contact-info">
+                                    <img
+                                        class="img-fluid"
+                                        src="assets/images/09Footer/foot-map.png"
+                                        alt=""
+                                    />
+                                    plot no 535 Sanjay colony sector 23 near
+                                    madrasi mandir, Faridabad - 121005, Haryana,
+                                    India
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="contact-section contact-section-form">
+                                <h4 class="heading">
+                                    <strong>Post a comment</strong>
+                                </h4>
+                                <p>
+                                    We are always available for you. Required
+                                    fields are marked *
+                                </p>
+
+                                <form
+                                    class="contact-form"
+                                    method="POST"
+                                    action=""
+                                    id="commentForm"
+                                    onsubmit="return validateCommentForm();"
+                                >
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    name="first_name"
+                                                    id="first_name"
+                                                    placeholder="First Name*"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    name="last_name"
+                                                    id="last_name"
+                                                    placeholder="Last Name*"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <input
+                                                    class="form-control"
+                                                    type="email"
+                                                    name="email"
+                                                    id="email"
+                                                    placeholder="Email*"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    name="contact"
+                                                    id="contact"
+                                                    placeholder="Contact"
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea
+                                            class="form-control"
+                                            rows="3"
+                                            name="message"
+                                            id="message"
+                                            placeholder="Any Message"
+                                        ></textarea>
+                                    </div>
+                                    <div class="text-center">
+                                        <button
+                                            type="submit"
+                                            name="submit_comment"
+                                            class="btn btn-primary"
+                                        >
+                                            SEND US MESSAGE
+                                        </button>
+                                    </div>
+
+                                    <script>
+                                        function validateCommentForm() {
+                                            // Get form elements
+                                            var firstName =
+                                                document.getElementById(
+                                                    "first_name",
+                                                );
+                                            var lastName =
+                                                document.getElementById(
+                                                    "last_name",
+                                                );
+                                            var email =
+                                                document.getElementById(
+                                                    "email",
+                                                );
+                                            var contact =
+                                                document.getElementById(
+                                                    "contact",
+                                                );
+                                            var message =
+                                                document.getElementById(
+                                                    "message",
+                                                );
+                                            var isValid = true;
+
+                                            // Reset all error states
+                                            firstName.classList.remove(
+                                                "is-invalid",
+                                            );
+                                            lastName.classList.remove(
+                                                "is-invalid",
+                                            );
+                                            email.classList.remove(
+                                                "is-invalid",
+                                            );
+                                            contact.classList.remove(
+                                                "is-invalid",
+                                            );
+                                            message.classList.remove(
+                                                "is-invalid",
+                                            );
+
+                                            // Validate first name (required, letters and spaces only)
+                                            if (
+                                                !firstName.value.trim() ||
+                                                !/^[A-Za-z\s]+$/.test(
+                                                    firstName.value.trim(),
+                                                )
+                                            ) {
+                                                firstName.classList.add(
+                                                    "is-invalid",
+                                                );
+                                                isValid = false;
+                                            }
+
+                                            // Validate last name (required, letters and spaces only)
+                                            if (
+                                                !lastName.value.trim() ||
+                                                !/^[A-Za-z\s]+$/.test(
+                                                    lastName.value.trim(),
+                                                )
+                                            ) {
+                                                lastName.classList.add(
+                                                    "is-invalid",
+                                                );
+                                                isValid = false;
+                                            }
+
+                                            // Validate email (required, valid format)
+                                            if (
+                                                !email.value.trim() ||
+                                                !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                                                    email.value.trim(),
+                                                )
+                                            ) {
+                                                email.classList.add(
+                                                    "is-invalid",
+                                                );
+                                                isValid = false;
+                                            }
+
+                                            // Validate contact (required, 10-13 digits)
+                                            if (
+                                                !contact.value.trim() ||
+                                                !/^[0-9]{10,13}$/.test(
+                                                    contact.value.trim(),
+                                                )
+                                            ) {
+                                                contact.classList.add(
+                                                    "is-invalid",
+                                                );
+                                                isValid = false;
+                                            }
+
+                                            // If validation fails, show alert
+                                            if (!isValid) {
+                                                alert(
+                                                    "Please fill in all required fields correctly",
+                                                );
+                                            }
+
+                                            return isValid;
+                                        }
+
+                                        // Add event listeners for real-time validation
+                                        document
+                                            .getElementById("first_name")
+                                            .addEventListener(
+                                                "blur",
+                                                function () {
+                                                    if (
+                                                        !this.value.trim() ||
+                                                        !/^[A-Za-z\s]+$/.test(
+                                                            this.value.trim(),
+                                                        )
+                                                    ) {
+                                                        this.classList.add(
+                                                            "is-invalid",
+                                                        );
+                                                    } else {
+                                                        this.classList.remove(
+                                                            "is-invalid",
+                                                        );
+                                                    }
+                                                },
+                                            );
+
+                                        document
+                                            .getElementById("last_name")
+                                            .addEventListener(
+                                                "blur",
+                                                function () {
+                                                    if (
+                                                        !this.value.trim() ||
+                                                        !/^[A-Za-z\s]+$/.test(
+                                                            this.value.trim(),
+                                                        )
+                                                    ) {
+                                                        this.classList.add(
+                                                            "is-invalid",
+                                                        );
+                                                    } else {
+                                                        this.classList.remove(
+                                                            "is-invalid",
+                                                        );
+                                                    }
+                                                },
+                                            );
+
+                                        document
+                                            .getElementById("email")
+                                            .addEventListener(
+                                                "blur",
+                                                function () {
+                                                    if (
+                                                        !this.value.trim() ||
+                                                        !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
+                                                            this.value.trim(),
+                                                        )
+                                                    ) {
+                                                        this.classList.add(
+                                                            "is-invalid",
+                                                        );
+                                                    } else {
+                                                        this.classList.remove(
+                                                            "is-invalid",
+                                                        );
+                                                    }
+                                                },
+                                            );
+
+                                        document
+                                            .getElementById("contact")
+                                            .addEventListener(
+                                                "blur",
+                                                function () {
+                                                    if (
+                                                        !this.value.trim() ||
+                                                        !/^[0-9]{10,13}$/.test(
+                                                            this.value.trim(),
+                                                        )
+                                                    ) {
+                                                        this.classList.add(
+                                                            "is-invalid",
+                                                        );
+                                                    } else {
+                                                        this.classList.remove(
+                                                            "is-invalid",
+                                                        );
+                                                    }
+                                                },
+                                            );
+                                    </script>
+
+                                    <style>
+                                        .is-invalid {
+                                            border-color: #dc3545 !important;
+                                            background-color: #fff8f8 !important;
+                                        }
+                                    </style>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="copyright">
+                <div class="container">
+                    <div class="footer-bottom mt-4">
+                        <p>
+                            <a href="terms_conditions.php"
+                                >Terms, Conditions & Refund Policy</a
+                            >
+                            /
+                            <!-- <a href="#">Refund Policy</a> /  -->
+                            <a href="privacy_policy.php">Privacy Policy</a>
+                        </p>
+                        <p>Copyright &copy; 2026. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </section>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/owl.carousel.min.js"></script>
+        <script src="assets/js/layout.js"></script>
+
+        <script>
+            const backToTopBtn = document.getElementById("backToTop");
+
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 300) {
+                    backToTopBtn.style.display = "block";
+                } else {
+                    backToTopBtn.style.display = "none";
+                }
+            });
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+            $(document).ready(function () {
+                $(".screenshots-carousel").owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    autoplay: true,
+                    autoplayTimeout: 3000, // Time between slides in milliseconds
+                    autoplayHoverPause: true, // Pause on hover
+                    autoplaySpeed: 1000, // Transition speed
+                    rewind: false,
+                    dots: true,
+                    responsiveClass: true,
+                    responsive: {
+                        0: {
+                            items: 1,
+                            nav: true,
+                            loop: true,
+                        },
+                        600: {
+                            items: 2,
+                            nav: false,
+                            loop: true,
+                        },
+                        1000: {
+                            items: 3,
+                            nav: true,
+                            loop: true,
+                        },
+                    },
+                });
+                $("#testimonial-carousel").owlCarousel({
+                    loop: true,
+                    margin: 30,
+                    autoplay: true,
+                    autoplayTimeout: 3000, // Time between slides in milliseconds
+                    autoplayHoverPause: true, // Pause on hover
+                    autoplaySpeed: 1000, // Transition speed
+                    rewind: false,
+                    dots: true,
+                    responsiveClass: true,
+                    responsive: {
+                        0: {
+                            items: 1,
+                            nav: true,
+                            loop: true,
+                        },
+                        600: {
+                            items: 2,
+                            nav: false,
+                            loop: true,
+                        },
+                        1000: {
+                            items: 4,
+                            nav: true,
+                            loop: true, // Changed from false to true
+                        },
+                    },
+                });
+            });
+        </script>
+    </body>
+</html>

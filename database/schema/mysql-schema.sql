@@ -280,8 +280,11 @@ CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL DEFAULT 'customer',
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `otp` varchar(255) DEFAULT NULL,
+  `otp_expires_at` timestamp NULL DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -307,3 +310,4 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (8,'2026_09_07_1535
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (9,'2026_09_07_153535_create_rewards_table',3);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (10,'2026_09_07_153537_create_qr_codes_table',3);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (11,'2026_09_07_153538_create_customer_visits_table',3);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (12,'2026_09_09_121041_add_otp_and_role_to_users_table',4);

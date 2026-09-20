@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Mail\LoginOtpMail;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Business;
+use App\Models\Customer;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class OtpAuthController extends Controller
 {
@@ -19,43 +23,53 @@ class OtpAuthController extends Controller
         $request->validate([
             'email' => 'required|email',
             'role' => 'required|in:admin,merchant,customer',
+            'phone' => 'required_if:role,customer,merchant|string|min:7',
+            'name' => 'nullable|string',
         ]);
 
         $email = $request->email;
         $role = $request->role;
+        $name = $request->input('name', 'Demo User');
+        $phone = $request->input('country_code', '').$request->input('phone', '');
 
-        // Find or create user for prototype (in production, you'd only find and error if not found)
+        // Store details in session for verifyOtp
+        session(['otp_pending_phone' => $phone]);
+
+        // Find or create user
         $user = User::firstOrCreate(
             ['email' => $email],
             [
-                'name' => 'Demo User',
+                'name' => $name,
                 'password' => Hash::make('password'),
-                'role' => $role
+                'role' => $role,
             ]
         );
 
+        // If they provided a name during login/register, let's update it in case they want to change it or firstOrCreate found them
+        if ($request->filled('name') && $user->name !== $name) {
+            $user->name = $name;
+        }
+
         // Generate 4-digit OTP
         $otp = rand(1000, 9999);
-        
+
         // Update User
         $user->otp = $otp;
         $user->otp_expires_at = Carbon::now()->addMinutes(10);
         $user->save();
 
-        // Send Email (will be logged to storage/logs/laravel.log based on .env config, or sent via SMTP)
+        // Send Email
         try {
-            \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\LoginOtpMail($otp));
+            Mail::to($user->email)->send(new LoginOtpMail($otp));
         } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('Mail sending failed: ' . $e->getMessage());
-            // If mail fails, we still continue but the user won't get the email.
-            // They can check logs for the OTP or we can flash an error message.
+            Log::error('Mail sending failed: '.$e->getMessage());
             session()->flash('mail_error', 'Warning: Email could not be sent. Please check your SMTP settings.');
         }
 
-        // For local testing, flash the OTP to the session so the user can see it on screen
+        // For local testing, flash the OTP
         session()->flash('demo_otp', $otp);
 
-        // Store role and email in session to know who is verifying
+        // Store role and email in session
         session(['otp_pending_email' => $user->email, 'otp_pending_role' => $role]);
 
         // Redirect to respective verify pages
@@ -80,13 +94,13 @@ class OtpAuthController extends Controller
         $email = session('otp_pending_email');
         $role = session('otp_pending_role');
 
-        if (!$email || !$role) {
+        if (! $email || ! $role) {
             return redirect('/')->withErrors(['error' => 'Session expired. Please login again.']);
         }
 
         $user = User::where('email', $email)->first();
 
-        if (!$user || $user->otp !== $request->otp || Carbon::now()->greaterThan($user->otp_expires_at)) {
+        if (! $user || $user->otp !== $request->otp || Carbon::now()->greaterThan($user->otp_expires_at)) {
             return back()->withErrors(['otp' => 'Invalid or expired OTP.']);
         }
 
@@ -94,6 +108,27 @@ class OtpAuthController extends Controller
         $user->otp = null;
         $user->otp_expires_at = null;
         $user->save();
+
+        if ($role == 'merchant') {
+            Business::firstOrCreate(
+                ['email' => $user->email],
+                [
+                    'user_id' => $user->id,
+                    'name' => $user->name,
+                    'phone' => session('otp_pending_phone') ?: '00000'.rand(10000, 99999),
+                ]
+            );
+        } elseif ($role == 'customer') {
+            Customer::firstOrCreate(
+                ['email' => $user->email],
+                [
+                    'name' => $user->name,
+                    'phone' => session('otp_pending_phone') ?: '00000'.rand(10000, 99999),
+                ]
+            );
+        }
+
+        Auth::login($user);
 
         // Login by setting the session prototype variables
         if ($role == 'admin') {

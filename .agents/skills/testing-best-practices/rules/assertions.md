@@ -17,12 +17,12 @@ First identify the subject of the check, then find an assertion designed for it.
 
 Use the assertion in this table for each subject.
 
-| Subject | Assertion to use |
-| --- | --- |
-| A return value, the state of an object, or a transformation of a value | `assertSame()`, or the assertion for the type |
-| An HTTP status, JSON, a session, or Inertia | a Laravel response assertion |
-| The state in the database | a Laravel database assertion |
-| The existence of a model | `assertModelExists($model)` rather than `assertDatabaseHas('users', ['id' => $user->id])` |
+| Subject                                                                | Assertion to use                                                                          |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| A return value, the state of an object, or a transformation of a value | `assertSame()`, or the assertion for the type                                             |
+| An HTTP status, JSON, a session, or Inertia                            | a Laravel response assertion                                                              |
+| The state in the database                                              | a Laravel database assertion                                                              |
+| The existence of a model                                               | `assertModelExists($model)` rather than `assertDatabaseHas('users', ['id' => $user->id])` |
 
 Use `assertSame()` and not `assertEquals()`, because `assertSame()` also compares the type.
 
@@ -44,7 +44,7 @@ $expected = now()->subHours(24)->floorSeconds(30)->toJson();
 $this->assertSame($expected, $from);
 
 // The test sets a fixed input and asserts a known value...
-$this->travelTo('2025-01-01 00:00:00');
+$this->travelTo('2026-01-01 00:00:00');
 $this->assertSame('2024-12-31T00:00:00.000000Z', $from);
 ```
 

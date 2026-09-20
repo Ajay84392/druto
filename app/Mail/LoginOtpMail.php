@@ -3,8 +3,8 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -146,7 +146,7 @@ class LoginOtpMail extends Mailable
                                                         letter-spacing:8px;
                                                         color:#111827;
                                                     ">
-                                                        ' . $this->otp . '
+                                                        '.$this->otp.'
                                                     </div>
 
                                                 </td>
@@ -224,7 +224,7 @@ class LoginOtpMail extends Mailable
                                             font-size:12px;
                                             color:#9ca3af;
                                         ">
-                                            &copy; ' . date('Y') . ' BeAurex. All rights reserved.
+                                            &copy; '.date('Y').' BeAurex. All rights reserved.
                                         </p>
 
                                     </td>
@@ -246,7 +246,7 @@ class LoginOtpMail extends Mailable
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

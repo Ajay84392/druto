@@ -1,254 +1,295 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('title', 'FAQ Editor')
 
 @section('content')
 <div class="flex-1 overflow-auto p-6 md:p-10">
-    
     <div class="mb-8">
-        <h1 class="text-2xl font-bold text-slate-900 mb-1">FAQ Editor</h1>
-        <div class="text-xs text-slate-500 font-medium flex items-center space-x-1">
-            <a href="/admin/dashboard" class="hover:text-red-600 transition">Home</a>
+        <h1 class="text-2xl font-bold text-[#0f172a] mb-1">FAQ Editor</h1>
+        <div class="text-xs text-[#475569] font-medium flex items-center space-x-1">
+            <a href="/admin/dashboard" class="hover:text-[#b00000] transition">Home</a>
             <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-            <a href="/admin/settings" class="hover:text-red-600 transition">Settings</a>
+            <a href="/admin/settings" class="hover:text-[#b00000] transition">Settings</a>
             <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-            <span class="text-slate-800">FAQ Editor</span>
+            <span class="text-[#0f172a]">FAQ Editor</span>
         </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
+    @if(session('success'))
+        <div class="mb-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-bold flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="bg-white rounded-2xl shadow-sm border border-[#e2e8f0] overflow-hidden">
         
-        <!-- Controls Row -->
-        <div class="p-5 border-b border-slate-200 flex flex-col lg:flex-row items-center justify-between gap-4">
-            <div class="flex flex-col md:flex-row items-center gap-4 w-full lg:w-auto">
+        <!-- Filters Bar -->
+        <div class="p-4 border-b border-[#e2e8f0] bg-[#f1f5f9]/50 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <form action="{{ route('admin.faq.index') }}" method="GET" class="flex-1 flex flex-col md:flex-row gap-4 w-full">
                 <!-- Search -->
-                <div class="relative w-full md:w-80">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    </div>
-                    <input type="text" class="block w-full pl-9 pr-3 py-2 border border-slate-200 rounded-lg leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 text-sm transition" placeholder="Search FAQ by question or keyword...">
+                <div class="relative w-full md:w-1/3">
+                    <svg class="w-4 h-4 absolute left-3 top-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" name="search" placeholder="Search FAQ by question or keyword..." value="{{ request('search') }}"
+                        class="w-full bg-white border border-[#e2e8f0] rounded-xl pl-9 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500">
                 </div>
                 
-                <!-- Filters -->
-                <select class="block w-full md:w-40 pl-3 pr-8 py-2 border border-slate-200 rounded-lg leading-5 bg-white text-slate-700 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition">
-                    <option>All Categories</option>
-                    <option>General</option>
-                    <option>Merchant</option>
-                    <option>Rewards</option>
+                <!-- Category Filter -->
+                <select name="category" onchange="this.form.submit()" class="w-full md:w-48 bg-white border border-[#e2e8f0] rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500">
+                    <option value="All Categories" {{ request('category') === 'All Categories' ? 'selected' : '' }}>All Categories</option>
+                    <option value="General" {{ request('category') === 'General' ? 'selected' : '' }}>General</option>
+                    <option value="Merchant" {{ request('category') === 'Merchant' ? 'selected' : '' }}>Merchant</option>
+                    <option value="Rewards" {{ request('category') === 'Rewards' ? 'selected' : '' }}>Rewards</option>
+                    <option value="Integration" {{ request('category') === 'Integration' ? 'selected' : '' }}>Integration</option>
+                    <option value="Support" {{ request('category') === 'Support' ? 'selected' : '' }}>Support</option>
                 </select>
-                <select class="block w-full md:w-40 pl-3 pr-8 py-2 border border-slate-200 rounded-lg leading-5 bg-white text-slate-700 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition">
-                    <option>All Status</option>
-                    <option>Published</option>
-                    <option>Draft</option>
-                </select>
-            </div>
 
-            <!-- Add FAQ Button -->
-            <button class="flex items-center justify-center space-x-2 border border-transparent bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-100 transition w-full lg:w-auto shrink-0">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
-                <span>Add FAQ</span>
+                <!-- Status Filter -->
+                <select name="status" onchange="this.form.submit()" class="w-full md:w-40 bg-white border border-[#e2e8f0] rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500">
+                    <option value="All Status" {{ request('status') === 'All Status' ? 'selected' : '' }}>All Status</option>
+                    <option value="Published" {{ request('status') === 'Published' ? 'selected' : '' }}>Published</option>
+                    <option value="Draft" {{ request('status') === 'Draft' ? 'selected' : '' }}>Draft</option>
+                    <option value="Unpublished" {{ request('status') === 'Unpublished' ? 'selected' : '' }}>Unpublished</option>
+                </select>
+            </form>
+
+            <button onclick="document.getElementById('addFaqModal').classList.remove('hidden')" class="w-full md:w-auto px-4 py-2 bg-white border border-red-200 text-[#b00000] font-bold text-sm rounded-xl hover:bg-red-50 transition whitespace-nowrap">
+                + Add FAQ
             </button>
         </div>
 
         <!-- Table -->
-        <div class="overflow-x-auto table-container">
-            <table class="w-full text-left border-collapse whitespace-nowrap">
+        <div class="overflow-x-auto">
+            <div class="overflow-x-auto w-full"><table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200 text-[11px] uppercase tracking-wider font-bold text-slate-600">
-                        <th class="px-5 py-4 w-12 text-center">#</th>
-                        <th class="px-5 py-4 w-1/3">Question</th>
-                        <th class="px-5 py-4">Category</th>
-                        <th class="px-5 py-4">Status</th>
-                        <th class="px-5 py-4 text-center">Order</th>
-                        <th class="px-5 py-4">Last Updated</th>
-                        <th class="px-5 py-4 text-center">Actions</th>
+                    <tr class="bg-[#f1f5f9] border-b border-[#e2e8f0] text-xs font-bold text-[#475569] uppercase tracking-wider">
+                        <th class="px-6 py-4">#</th>
+                        <th class="px-6 py-4">Question</th>
+                        <th class="px-6 py-4">Category</th>
+                        <th class="px-6 py-4">Status</th>
+                        <th class="px-6 py-4">Order</th>
+                        <th class="px-6 py-4">Last Updated</th>
+                        <th class="px-6 py-4 text-center">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100 text-sm font-medium text-slate-800">
-                    <!-- Row 1 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">1</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">What is BeAurex?</td>
-                        <td class="px-5 py-4 text-slate-600">General</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">1</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 24, 2025 11:20 AM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                <tbody class="divide-y divide-slate-100 text-sm">
+                    @forelse($faqs as $index => $faq)
+                    <tr class="hover:bg-[#f1f5f9]/50 transition">
+                        <td class="px-6 py-4 text-[#475569] font-medium">{{ $faqs->firstItem() + $index }}</td>
+                        <td class="px-6 py-4 font-semibold text-[#0f172a]">{{ $faq->question }}</td>
+                        <td class="px-6 py-4 text-[#475569]">{{ $faq->category }}</td>
+                        <td class="px-6 py-4">
+                            @if($faq->status === 'Published')
+                                <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider text-emerald-700 bg-emerald-100 rounded-full">Published</span>
+                            @elseif($faq->status === 'Draft')
+                                <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider text-amber-700 bg-amber-100 rounded-full">Draft</span>
+                            @else
+                                <span class="px-2.5 py-1 text-[10px] font-bold tracking-wider text-[#8a0000] bg-red-100 rounded-full">Unpublished</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-[#475569] font-medium">{{ $faq->sort_order }}</td>
+                        <td class="px-6 py-4 text-[#475569]">{{ $faq->updated_at->format('M d, Y h:i A') }}</td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center justify-center space-x-2">
+                                <button onclick="openPreviewModal(`{{ addslashes($faq->question) }}`, `{{ addslashes($faq->answer) }}`)" class="p-1.5 rounded text-slate-400 hover:text-[#475569] hover:bg-slate-100 transition" title="Preview">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                </button>
+                                <button onclick="openEditModal({{ $faq->id }}, `{{ addslashes($faq->question) }}`, `{{ addslashes($faq->answer) }}`, `{{ $faq->category }}`, `{{ $faq->status }}`, {{ $faq->sort_order }})" class="p-1.5 rounded text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition" title="Edit">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                </button>
+                                <form action="{{ route('admin.faq.destroy', $faq->id) }}" method="POST" onsubmit="return confirm('Delete this FAQ?')">
+                                    @csrf
+                                    @method("DELETE")
+                                    <button type="submit" class="p-1.5 rounded text-slate-400 hover:text-[#b00000] hover:bg-red-50 transition" title="Delete">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
-                    <!-- Row 2 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">2</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">How does BeAurex work?</td>
-                        <td class="px-5 py-4 text-slate-600">General</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">2</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 24, 2025 10:45 AM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center text-[#475569]">
+                            <div class="mb-2">
+                                <svg class="w-8 h-8 mx-auto text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             </div>
+                            No FAQs found matching your criteria.
                         </td>
                     </tr>
-                    <!-- Row 3 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">3</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">How can merchants join BeAurex?</td>
-                        <td class="px-5 py-4 text-slate-600">Merchant</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">1</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 24, 2025 09:30 AM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 4 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">4</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">How do I create a loyalty program?</td>
-                        <td class="px-5 py-4 text-slate-600">Merchant</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">2</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 24, 2025 09:15 AM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 5 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">5</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">How are points calculated?</td>
-                        <td class="px-5 py-4 text-slate-600">Rewards</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">1</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025 08:50 PM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 6 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">6</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">How can customers redeem rewards?</td>
-                        <td class="px-5 py-4 text-slate-600">Rewards</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-700">Draft</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">2</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025 08:20 PM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 7 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">7</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">Is BeAurex free to use?</td>
-                        <td class="px-5 py-4 text-slate-600">General</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">3</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025 07:45 PM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 8 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">8</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">Can I integrate BeAurex with my POS?</td>
-                        <td class="px-5 py-4 text-slate-600">Integration</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">1</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025 07:10 PM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 9 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">9</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">What payment methods are supported?</td>
-                        <td class="px-5 py-4 text-slate-600">General</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-600">Unpublished</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">4</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025 06:30 PM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!-- Row 10 -->
-                    <tr class="hover:bg-slate-50 transition">
-                        <td class="px-5 py-4 text-center text-slate-500">10</td>
-                        <td class="px-5 py-4 font-bold text-slate-700 whitespace-normal">How do I contact support?</td>
-                        <td class="px-5 py-4 text-slate-600">Support</td>
-                        <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Published</span></td>
-                        <td class="px-5 py-4 text-center font-bold text-slate-700">1</td>
-                        <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025 05:50 PM</td>
-                        <td class="px-5 py-4 text-center">
-                            <div class="flex justify-center space-x-2 text-slate-400">
-                                <button class="hover:text-slate-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button>
-                                <button class="hover:text-blue-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></button>
-                                <button class="hover:text-red-600 transition"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforelse
                 </tbody>
-            </table>
+            </table></div>
         </div>
         
-        <!-- Pagination Footer -->
-        <div class="p-4 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 bg-white text-sm text-slate-500">
-            <div class="font-medium">Showing 1 to 10 of 48 entries</div>
-            <div class="flex items-center space-x-1">
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 transition" disabled>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-red-600 text-white font-bold shadow-sm">1</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">2</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">3</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">4</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">5</button>
-                <span class="w-8 h-8 flex items-center justify-center text-slate-400 font-bold">...</span>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">5</button>
-                <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
+        <!-- Pagination -->
+        @if($faqs->hasPages())
+        <div class="px-6 py-4 border-t border-[#e2e8f0]">
+            {{ $faqs->links() }}
+        </div>
+        @else
+        <div class="px-6 py-4 border-t border-[#e2e8f0] text-sm text-[#475569] text-center md:text-left">
+            Showing {{ $faqs->firstItem() ?? 0 }} to {{ $faqs->lastItem() ?? 0 }} of {{ $faqs->total() }} entries
+        </div>
+        @endif
+
+    </div>
+
+</div>
+
+<!-- ===== ADD FAQ MODAL ===== -->
+<div id="addFaqModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.5)">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+        <div class="flex items-center justify-between px-6 py-5 border-b border-[#e2e8f0]">
+            <h2 class="text-lg font-black text-[#0f172a]">Add New FAQ</h2>
+            <button onclick="document.getElementById('addFaqModal').classList.add('hidden')" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <form action="{{ route('admin.faq.store') }}" method="POST" class="p-6 space-y-5">
+            @csrf
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">Question <span class="text-[#EF4444]">*</span></label>
+                <input type="text" name="question" placeholder="What is LoyalQR?" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] placeholder-slate-400 focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
             </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Category <span class="text-[#EF4444]">*</span></label>
+                    <select name="category" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+                        <option value="General">General</option>
+                        <option value="Merchant">Merchant</option>
+                        <option value="Rewards">Rewards</option>
+                        <option value="Integration">Integration</option>
+                        <option value="Support">Support</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Status <span class="text-[#EF4444]">*</span></label>
+                    <select name="status" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+                        <option value="Published">Published</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Unpublished">Unpublished</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">Display Order (Optional)</label>
+                <input type="number" name="sort_order" placeholder="e.g. 1" class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] placeholder-slate-400 focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">Answer <span class="text-[#EF4444]">*</span></label>
+                <textarea name="answer" rows="4" placeholder="LoyalQR is a..." required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] placeholder-slate-400 focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition resize-none"></textarea>
+            </div>
+            
+            <div class="flex items-center justify-end space-x-3 pt-2">
+                <button type="button" onclick="document.getElementById('addFaqModal').classList.add('hidden')" class="px-5 py-2.5 rounded-xl border border-[#e2e8f0] text-sm font-bold text-[#475569] hover:bg-[#f1f5f9] transition">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 rounded-xl text-white text-sm font-bold transition bg-[#b00000] hover:bg-[#8a0000]">Save FAQ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===== EDIT FAQ MODAL ===== -->
+<div id="editFaqModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.5)">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+        <div class="flex items-center justify-between px-6 py-5 border-b border-[#e2e8f0]">
+            <h2 class="text-lg font-black text-[#0f172a]">Edit FAQ</h2>
+            <button onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <form id="editFaqForm" method="POST" class="p-6 space-y-5">
+            @csrf
+            @method("PUT")
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">Question <span class="text-[#EF4444]">*</span></label>
+                <input type="text" id="editQuestion" name="question" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Category <span class="text-[#EF4444]">*</span></label>
+                    <select id="editCategory" name="category" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+                        <option value="General">General</option>
+                        <option value="Merchant">Merchant</option>
+                        <option value="Rewards">Rewards</option>
+                        <option value="Integration">Integration</option>
+                        <option value="Support">Support</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Status <span class="text-[#EF4444]">*</span></label>
+                    <select id="editStatus" name="status" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+                        <option value="Published">Published</option>
+                        <option value="Draft">Draft</option>
+                        <option value="Unpublished">Unpublished</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">Display Order</label>
+                <input type="number" id="editSortOrder" name="sort_order" class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold text-slate-700 mb-2">Answer <span class="text-[#EF4444]">*</span></label>
+                <textarea id="editAnswer" name="answer" rows="4" required class="w-full bg-[#f1f5f9] border border-[#e2e8f0] rounded-xl px-4 py-3 text-sm font-medium text-[#0f172a] focus:outline-none focus:border-[#b00000] focus:ring-2 focus:ring-red-600/10 transition resize-none"></textarea>
+            </div>
+            
+            <div class="flex items-center justify-end space-x-3 pt-2">
+                <button type="button" onclick="document.getElementById('editFaqModal').classList.add('hidden')" class="px-5 py-2.5 rounded-xl border border-[#e2e8f0] text-sm font-bold text-[#475569] hover:bg-[#f1f5f9] transition">Cancel</button>
+                <button type="submit" class="px-5 py-2.5 rounded-xl text-white text-sm font-bold transition bg-[#b00000] hover:bg-[#8a0000]">Update FAQ</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===== PREVIEW FAQ MODAL ===== -->
+<div id="previewFaqModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4" style="background:rgba(0,0,0,0.5)">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+        <div class="flex items-center justify-between px-6 py-5 border-b border-[#e2e8f0]">
+            <h2 class="text-lg font-black text-[#0f172a]">FAQ Preview</h2>
+            <button onclick="document.getElementById('previewFaqModal').classList.add('hidden')" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div class="p-6">
+            <h3 id="previewQuestion" class="text-xl font-bold text-[#0f172a] mb-4"></h3>
+            <p id="previewAnswer" class="text-sm text-[#475569] leading-relaxed"></p>
+        </div>
+        <div class="px-6 py-4 bg-[#f1f5f9] border-t border-slate-100 rounded-b-2xl flex justify-end">
+            <button onclick="document.getElementById('previewFaqModal').classList.add('hidden')" class="px-5 py-2 bg-white border border-[#e2e8f0] rounded-xl text-sm font-bold text-slate-700 hover:bg-[#f1f5f9] transition">Close</button>
         </div>
     </div>
 </div>
+
 @endsection
+
+@section("scripts")
+<script>
+function openEditModal(id, question, answer, category, status, sortOrder) {
+    document.getElementById("editFaqForm").action = "/admin/settings/faq/" + id;
+    document.getElementById("editQuestion").value = question;
+    document.getElementById("editAnswer").value = answer;
+    document.getElementById("editCategory").value = category;
+    document.getElementById("editStatus").value = status;
+    document.getElementById("editSortOrder").value = sortOrder;
+    document.getElementById("editFaqModal").classList.remove("hidden");
+}
+
+function openPreviewModal(question, answer) {
+    document.getElementById("previewQuestion").innerText = question;
+    document.getElementById("previewAnswer").innerText = answer;
+    document.getElementById("previewFaqModal").classList.remove("hidden");
+}
+</script>
+@endsection
+
+
+
+
+
+

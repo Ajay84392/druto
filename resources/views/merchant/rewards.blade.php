@@ -1,139 +1,154 @@
 @extends('layouts.merchant')
 
-@section('title', 'Merchant Rewards')
+@section('title', 'Rewards Requests')
 
 @section('content')
-<div class="flex-1 overflow-auto p-6 md:p-10">
-
-        
-        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 space-y-4 md:space-y-0">
-            <div>
-                <h1 class="text-2xl font-black text-slate-900 tracking-tight">Reward Requests</h1>
-                <p class="text-sm text-slate-500 font-medium">Manage and approve customer reward claims.</p>
-            </div>
-            
-            <!-- Web Tabs -->
-            <div class="inline-flex bg-white p-1.5 rounded-xl shadow-sm border border-slate-200">
-                <button class="px-6 py-2 bg-[#900000] text-white rounded-lg text-sm font-bold shadow-sm flex items-center space-x-2">
-                    <span>Pending</span>
-                    <span class="bg-white text-[#900000] px-2 py-0.5 rounded-md text-xs">3</span>
-                </button>
-                <button class="px-6 py-2 text-slate-600 hover:text-slate-900 rounded-lg text-sm font-bold transition">Approved</button>
-                <button class="px-6 py-2 text-slate-600 hover:text-slate-900 rounded-lg text-sm font-bold transition">Declined</button>
-            </div>
+<div class="bg-slate-50 md:bg-transparent min-h-screen md:min-h-0 relative pb-24 md:pb-0">
+    
+    <!-- Red Header Section -->
+    <div class="bg-[#8a0000] px-6 pt-10 pb-20 md:pb-24 text-white relative">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-xl font-black tracking-tight mx-auto">Rewards</h1>
+            <!-- Profile Avatar (Visible on Mobile) -->
+            <a href="/merchant/profile" class="w-10 h-10 rounded-full border border-red-400/50 flex items-center justify-center hover:bg-white/10 transition md:hidden shrink-0 absolute right-6 top-10">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg>
+            </a>
         </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            <!-- Request Card 1 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
-                <div class="flex items-start">
-                    <div class="w-20 h-24 bg-gradient-to-br from-[#900000] to-red-600 rounded-xl flex-shrink-0 flex flex-col justify-center items-center text-white p-2 shadow-inner">
-                        <span class="text-[10px] font-bold opacity-80 mb-1">Coupon</span>
-                        <span class="text-xl font-black leading-tight text-center">30%<br>OFF</span>
-                    </div>
-                    
-                    <div class="ml-5 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-black text-slate-900 leading-tight">Sumit</h3>
-                            <span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-2 py-1 rounded-md uppercase">Pending</span>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold mb-3">ID: LQR-8F4A29</p>
-                        
-                        <p class="text-sm font-bold text-[#900000] mb-3 leading-tight">30% OFF on Next Purchase</p>
-                        
-                        <div class="space-y-1">
-                            <div class="flex items-center text-xs text-slate-500 space-x-1.5 font-medium">
-                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>Today, 2:18 PM</span>
-                            </div>
-                            <div class="flex items-center text-xs text-slate-500 space-x-1.5 font-medium">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                <span>Expires: 30 Jul 2026</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex space-x-4 mt-6 pt-5 border-t border-slate-100">
-                    <button class="flex-1 bg-white border-2 border-slate-200 hover:border-red-200 hover:text-red-600 text-slate-600 font-bold py-2.5 rounded-xl text-sm transition">Decline</button>
-                    <button class="flex-1 bg-[#059669] hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-sm">Accept Reward</button>
-                </div>
-            </div>
-
-            <!-- Request Card 2 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
-                <div class="flex items-start">
-                    <div class="w-20 h-24 bg-slate-800 rounded-xl flex-shrink-0 flex flex-col justify-center items-center text-white p-2 shadow-inner">
-                        <span class="text-[10px] font-bold opacity-80 mb-1">FREE</span>
-                        <span class="text-sm font-black leading-tight text-center">COFFEE</span>
-                    </div>
-                    
-                    <div class="ml-5 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-black text-slate-900 leading-tight">Ajeet</h3>
-                            <span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-2 py-1 rounded-md uppercase">Pending</span>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold mb-3">ID: LQR-3K9D21</p>
-                        
-                        <p class="text-sm font-bold text-slate-800 mb-3 leading-tight">Free Coffee on Any Purchase</p>
-                        
-                        <div class="space-y-1">
-                            <div class="flex items-center text-xs text-slate-500 space-x-1.5 font-medium">
-                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>Today, 12:45 PM</span>
-                            </div>
-                            <div class="flex items-center text-xs text-slate-500 space-x-1.5 font-medium">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                <span>Expires: 28 Jul 2026</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex space-x-4 mt-6 pt-5 border-t border-slate-100">
-                    <button class="flex-1 bg-white border-2 border-slate-200 hover:border-red-200 hover:text-red-600 text-slate-600 font-bold py-2.5 rounded-xl text-sm transition">Decline</button>
-                    <button class="flex-1 bg-[#059669] hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-sm">Accept Reward</button>
-                </div>
-            </div>
-
-            <!-- Request Card 3 -->
-            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition">
-                <div class="flex items-start">
-                    <div class="w-20 h-24 bg-gradient-to-br from-emerald-600 to-teal-700 rounded-xl flex-shrink-0 flex flex-col justify-center items-center text-white p-2 shadow-inner">
-                        <span class="text-xl font-black leading-tight text-center">20%<br>OFF</span>
-                    </div>
-                    
-                    <div class="ml-5 flex-1">
-                        <div class="flex justify-between items-start">
-                            <h3 class="text-lg font-black text-slate-900 leading-tight">Pooja</h3>
-                            <span class="bg-orange-50 text-orange-600 text-[10px] font-bold px-2 py-1 rounded-md uppercase">Pending</span>
-                        </div>
-                        <p class="text-xs text-slate-400 font-semibold mb-3">ID: LQR-7H2M56</p>
-                        
-                        <p class="text-sm font-bold text-emerald-700 mb-3 leading-tight">20% OFF on Next Purchase</p>
-                        
-                        <div class="space-y-1">
-                            <div class="flex items-center text-xs text-slate-500 space-x-1.5 font-medium">
-                                <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>Yesterday, 6:30 PM</span>
-                            </div>
-                            <div class="flex items-center text-xs text-slate-500 space-x-1.5 font-medium">
-                                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                <span>Expires: 27 Jul 2026</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex space-x-4 mt-6 pt-5 border-t border-slate-100">
-                    <button class="flex-1 bg-white border-2 border-slate-200 hover:border-red-200 hover:text-red-600 text-slate-600 font-bold py-2.5 rounded-xl text-sm transition">Decline</button>
-                    <button class="flex-1 bg-[#059669] hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl text-sm transition shadow-sm">Accept Reward</button>
-                </div>
-            </div>
-
-        </div>
-
     </div>
-@endsection
 
+    <!-- Main Content Wrapper (Overlapping the red header) -->
+    <div class="bg-white md:bg-transparent rounded-t-3xl -mt-8 relative z-20 px-5 md:px-8 shadow-[0_-10px_20px_-5px_rgba(0,0,0,0.05)] md:shadow-none min-h-[500px]">
+        
+        <div class="pt-6 max-w-[1600px] mx-auto">
+            
+            <!-- Tabs -->
+            <div class="flex items-center justify-between space-x-2 bg-slate-50/50 md:bg-white p-1.5 rounded-2xl border border-slate-100 mb-6">
+                <a href="?status=pending" class="flex-1 text-center py-2.5 rounded-xl text-[11px] font-bold transition flex items-center justify-center space-x-1.5 {{ $status == 'pending' ? 'bg-white border border-red-200 text-[#b00000] shadow-sm' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50' }}">
+                    <span>Pending</span>
+                    @if($counts['pending'] > 0)
+                        <span class="bg-[#b00000] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center leading-none">{{ $counts['pending'] }}</span>
+                    @endif
+                </a>
+                <a href="?status=approved" class="flex-1 text-center py-2.5 rounded-xl text-[11px] font-bold transition {{ $status == 'approved' ? 'bg-[#900000] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50' }}">
+                    Approved
+                </a>
+                <a href="?status=declined" class="flex-1 text-center py-2.5 rounded-xl text-[11px] font-bold transition {{ $status == 'declined' ? 'bg-[#900000] text-white shadow-sm' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50' }}">
+                    Declined
+                </a>
+            </div>
+
+            @php
+                $items = $requests;
+                
+                // Use dummy data if database is empty so UI matches mockups
+                if(is_object($items) && $items->count() == 0) {
+                    if($status == 'pending') {
+                        $items = [
+                            (object)['id'=>1, 'reward_type'=>'DISCOUNT', 'reward_title'=>"30%\nOFF", 'customer'=>(object)['name'=>'Sumit', 'customer_id'=>'LQR-8F4A29'], 'reward_description'=>'30% OFF on Next Purchase', 'created_at'=>now()->format('Y-m-d 14:18:00'), 'expires_at'=>now()->addDays(5)->format('Y-m-d')],
+                            (object)['id'=>2, 'reward_type'=>'FREE', 'reward_title'=>"FREE\nCOFFEE", 'customer'=>(object)['name'=>'Ajeet', 'customer_id'=>'LQR-3A2B55'], 'reward_description'=>'Free Coffee on Any Purchase', 'created_at'=>now()->format('Y-m-d 15:30:00'), 'expires_at'=>now()->addDays(2)->format('Y-m-d')],
+                            (object)['id'=>3, 'reward_type'=>'DISCOUNT', 'reward_title'=>"10%\nOFF", 'customer'=>(object)['name'=>'Pooja', 'customer_id'=>'LQR-9Z8X44'], 'reward_description'=>'10% OFF on Next Purchase', 'created_at'=>now()->format('Y-m-d 16:45:00'), 'expires_at'=>now()->addDays(7)->format('Y-m-d')],
+                        ];
+                    } elseif($tab == 'approved') {
+                        $items = [
+                            (object)['id'=>4, 'reward_type'=>'FREE', 'reward_title'=>"FREE\nCOFFEE", 'customer'=>(object)['name'=>'Rohit', 'customer_id'=>'LQR-1A2B34'], 'reward_description'=>'Free Coffee on Any Purchase', 'updated_at'=>now()->format('Y-m-d 11:20:00')],
+                            (object)['id'=>5, 'reward_type'=>'DISCOUNT', 'reward_title'=>"50%\nOFF", 'customer'=>(object)['name'=>'Neha', 'customer_id'=>'LQR-7C8D9E'], 'reward_description'=>'50% OFF on Next Purchase', 'updated_at'=>now()->format('Y-m-d 12:45:00')],
+                            (object)['id'=>6, 'reward_type'=>'FREE', 'reward_title'=>"FREE\nSANDWICH", 'customer'=>(object)['name'=>'Vikas', 'customer_id'=>'LQR-2X3Y4Z'], 'reward_description'=>'Free Sandwich with Coffee', 'updated_at'=>now()->format('Y-m-d 14:10:00')],
+                        ];
+                    } else {
+                        $items = [
+                            (object)['id'=>7, 'reward_type'=>'DISCOUNT', 'reward_title'=>"20%\nOFF", 'customer'=>(object)['name'=>'Karan', 'customer_id'=>'LQR-2X7Y90'], 'reward_description'=>'20% OFF on Next Purchase', 'updated_at'=>now()->format('Y-m-d 15:10:00')],
+                            (object)['id'=>8, 'reward_type'=>'FREE', 'reward_title'=>"FREE\nTEA", 'customer'=>(object)['name'=>'Ishita', 'customer_id'=>'LQR-4M5N6P'], 'reward_description'=>'Free Tea on Any Purchase', 'updated_at'=>now()->format('Y-m-d 16:25:00')],
+                            (object)['id'=>9, 'reward_type'=>'DISCOUNT', 'reward_title'=>"15%\nOFF", 'customer'=>(object)['name'=>'Manish', 'customer_id'=>'LQR-8Q9R0S'], 'reward_description'=>'15% OFF on Next Purchase', 'updated_at'=>now()->format('Y-m-d 17:40:00')],
+                        ];
+                    }
+                }
+            @endphp
+
+            @if(count($items) == 0)
+            <!-- Empty State Content -->
+            <div class="flex flex-col items-center justify-center py-12 px-4 text-center">
+                <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mb-4 border border-slate-100">
+                    <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path></svg>
+                </div>
+                <h2 class="text-[15px] font-black text-slate-900 mb-1">No {{ ucfirst($status) }} Requests</h2>
+                <p class="text-[11px] font-semibold text-slate-500 max-w-[200px] mx-auto">There are no {{ $status }} reward requests to show right now.</p>
+            </div>
+            @else
+            <!-- Title -->
+            <h3 class="text-xs font-semibold text-[#64748b] mb-4 uppercase tracking-wider">{{ ucfirst($status) }} Requests</h3>
+
+            <!-- List -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                @foreach($items as $request)
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] relative overflow-hidden flex flex-col">
+                    <div class="flex items-start space-x-4 mb-4">
+                        <!-- Reward Icon/Image -->
+                        <div class="w-20 h-24 rounded-xl flex-shrink-0 flex flex-col justify-center items-center text-white p-2 shadow-inner border border-black/10 {{ $request->reward_type == 'FREE' ? 'bg-slate-900' : ($request->reward_type == 'DISCOUNT' ? 'bg-gradient-to-br from-green-800 to-green-600' : 'bg-gradient-to-br from-[#b00000] to-red-700') }}">
+                            <span class="text-[8px] font-black opacity-80 mb-0.5 tracking-wider">{{ $request->reward_type }}</span>
+                            <span class="text-[15px] font-black leading-tight text-center">{!! nl2br(e($request->reward_title)) !!}</span>
+                        </div>
+                        
+                        <!-- Info -->
+                        <div class="flex-1">
+                            <h4 class="font-black text-slate-900 text-[13px] leading-tight mb-0.5">{{ $request->customer?->name ?? $request->customer_name ?? 'Customer Name' }}</h4>
+                            <p class="text-[9px] font-semibold text-slate-500 mb-2">ID: {{ $request->customer?->customer_id ?? $request->code ?? 'LQR-8F4A29' }}</p>
+                            
+                            <h5 class="text-[11px] font-bold text-slate-800 leading-tight mb-2">{{ $request->reward_description }}</h5>
+                            
+                            @if($status == 'pending')
+                                <div class="flex items-center space-x-1.5 text-[9px] font-semibold text-slate-500 mb-1">
+                                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>{{ Carbon\Carbon::parse($request->created_at)->format('M d, g:i A') }}</span>
+                                </div>
+                                <div class="flex items-center space-x-1.5 text-[9px] font-bold text-orange-500">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span>Expires: {{ Carbon\Carbon::parse($request->expires_at)->format('d M Y') }}</span>
+                                </div>
+                            @elseif($status == 'approved')
+                                <p class="text-[9px] font-semibold text-slate-500 mb-0.5">Approved on</p>
+                                <p class="text-[10px] font-bold text-slate-700">{{ Carbon\Carbon::parse($request->updated_at)->format('d M Y, g:i A') }}</p>
+                            @else
+                                <p class="text-[9px] font-semibold text-slate-500 mb-0.5">Declined on</p>
+                                <p class="text-[10px] font-bold text-slate-700">{{ Carbon\Carbon::parse($request->updated_at)->format('d M Y, g:i A') }}</p>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-auto">
+                        @if($status == 'pending')
+                            <div class="flex items-center justify-between space-x-3 pt-4 border-t border-slate-50">
+                                <form action="/merchant/rewards/{{ $request->id }}/decline" method="POST" class="flex-1">
+                                    @csrf
+                                    <button type="submit" class="w-full bg-white border border-[#fca5a5] text-[#b00000] font-bold py-2 rounded-xl text-[11px] hover:bg-red-50 transition shadow-sm">Decline</button>
+                                </form>
+                                <form action="/merchant/rewards/{{ $request->id }}/approve" method="POST" class="flex-1">
+                                    @csrf
+                                    <button type="submit" class="w-full bg-[#16a34a] hover:bg-[#15803d] text-white font-bold py-2 rounded-xl text-[11px] transition shadow-sm">Accept</button>
+                                </form>
+                            </div>
+                        @elseif($status == 'approved')
+                            <div class="flex justify-end pt-3 border-t border-slate-50">
+                                <div class="bg-green-50 text-green-600 border border-green-100 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shadow-sm">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Approved</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                </div>
+                            </div>
+                        @else
+                            <div class="flex justify-end pt-3 border-t border-slate-50">
+                                <div class="bg-red-50 text-red-600 border border-red-100 px-3 py-1.5 rounded-lg flex items-center space-x-1.5 shadow-sm">
+                                    <span class="text-[10px] font-black uppercase tracking-wider">Declined</span>
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
+
+        </div>
+    </div>
+</div>
+@endsection

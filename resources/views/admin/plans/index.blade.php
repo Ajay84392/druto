@@ -1,190 +1,134 @@
 @extends('layouts.admin')
-
-@section('title', 'Admin')
+@section('title', 'Manage Plans')
 
 @section('content')
-        <!-- Page Content -->
-        <div class="flex-1 overflow-auto p-6 md:p-10">
-            
-            <!-- Page Header & Breadcrumbs -->
-            <div class="mb-6">
-                <h1 class="text-2xl font-bold text-slate-900 mb-1">Plan History</h1>
-                <div class="text-xs text-slate-500 font-medium flex items-center space-x-1">
-                    <a href="/admin/dashboard" class="hover:text-red-600 transition">Home</a>
-                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                    <span class="text-slate-800">Plans</span>
-                    <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
-                    <span class="text-slate-800">Plan History</span>
-                </div>
-            </div>
+    <!-- Page Content -->
+    <div class="flex-1 overflow-auto p-6 md:p-10">
 
-            <!-- Tabs -->
-            <div class="flex space-x-2 mb-6 border-b border-slate-200">
-                <a href="#" class="flex items-center space-x-2 px-4 py-2.5 text-sm font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-t-lg transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                    <span>Active Plans</span>
-                </a>
-                <a href="/admin/plans" class="flex items-center space-x-2 px-4 py-2.5 text-sm font-semibold text-red-600 border-b-2 border-red-600 bg-red-50/50 rounded-t-lg">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <span>Plan History</span>
-                </a>
-                <a href="/admin/plans/create" class="flex items-center space-x-2 px-4 py-2.5 text-sm font-semibold text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-t-lg transition">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
-                    <span>Create Plan</span>
-                </a>
+        <!-- Page Header & Breadcrumbs -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-[#0f172a] mb-1">Manage Plans</h1>
+            <div class="text-xs text-[#475569] font-medium flex items-center space-x-1">
+                <a href="/admin/dashboard" class="hover:text-[#b00000] transition">Home</a>
+                <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                </svg>
+                <span class="text-[#0f172a]">Plans</span>
+                <svg class="w-3 h-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                </svg>
+                <span class="text-[#0f172a]">Active Plans</span>
             </div>
+        </div>
 
-            <!-- Table Section -->
-            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                
-                <!-- Controls Row -->
-                <div class="p-5 border-b border-slate-200 flex flex-col xl:flex-row items-center gap-4 justify-between">
-                    <div class="flex flex-col sm:flex-row items-center gap-4 w-full xl:w-auto">
-                        <!-- Search -->
-                        <div class="relative w-full sm:w-64">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                            </div>
-                            <input type="text" class="block w-full pl-9 pr-3 py-2 border border-slate-200 rounded-lg leading-5 bg-white placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 text-sm transition" placeholder="Search by plan name...">
+        <!-- Tabs -->
+        <div class="flex space-x-2 mb-6 border-b border-[#e2e8f0]">
+            <a href="/admin/plans"
+                class="flex items-center space-x-2 px-4 py-2.5 text-sm font-semibold text-[#b00000] border-b-2 border-[#b00000] bg-red-50/50 rounded-t-lg transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                    </path>
+                </svg>
+                <span>Active Plans</span>
+            </a>
+            <a href="{{ route('plans.history') }}"
+                class="flex items-center space-x-2 px-4 py-2.5 text-sm font-semibold text-[#475569] hover:text-slate-700 hover:bg-slate-100 rounded-t-lg transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                </svg>
+                <span>Plan History</span>
+            </a>
+            <a href="/admin/plans/create"
+                class="flex items-center space-x-2 px-4 py-2.5 text-sm font-semibold text-[#475569] hover:text-slate-700 hover:bg-slate-100 rounded-t-lg transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                </svg>
+                <span>Create Plan</span>
+            </a>
+        </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                @forelse($plans as $plan)
+                <div class="bg-white rounded-2xl border {{ $plan->name == 'Professional Plan' ? 'border-amber-400 shadow-md relative' : 'border-[#e2e8f0] shadow-sm' }} p-6 flex flex-col hover:shadow-lg transition relative">
+                    @if($plan->name == 'Professional Plan')
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-2">
+                        <span class="text-xs font-bold text-[#F59E0B]">Most Popular</span>
+                    </div>
+                    @endif
+                    
+                    <div class="flex justify-center mb-4 mt-2">
+                        @if(str_contains(strtolower($plan->name), 'basic'))
+                        <div class="w-12 h-12 rounded-full bg-emerald-50 text-[#22C55E] flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                         </div>
-                        
-                        <!-- Filters -->
-                        <select class="block w-full sm:w-auto pl-3 pr-8 py-2 border border-slate-200 rounded-lg leading-5 bg-white text-slate-700 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition">
-                            <option>All Actions</option>
-                            <option>Created</option>
-                            <option>Updated</option>
-                            <option>Deactivated</option>
-                            <option>Deleted</option>
-                        </select>
-                        <select class="block w-full sm:w-auto pl-3 pr-8 py-2 border border-slate-200 rounded-lg leading-5 bg-white text-slate-700 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-red-500 focus:border-red-500 transition">
-                            <option>All Status</option>
-                            <option>Active</option>
-                            <option>Inactive</option>
-                            <option>Deleted</option>
-                        </select>
-
-                        <!-- Date Range -->
-                        <button class="flex items-center justify-between w-full sm:w-64 border border-slate-200 bg-white text-slate-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-50 transition">
-                            <span>May 01, 2025 - May 24, 2025</span>
-                            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </button>
+                        @elseif(str_contains(strtolower($plan->name), 'professional'))
+                        <div class="w-12 h-12 rounded-full bg-amber-50 text-[#F59E0B] flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                        </div>
+                        @else
+                        <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                        </div>
+                        @endif
                     </div>
-
-                    <!-- Export Button -->
-                    <button class="flex items-center justify-center space-x-2 border border-red-200 bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-100 transition w-full xl:w-auto shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        <span>Export</span>
-                    </button>
-                </div>
-
-                <!-- Table -->
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-slate-50 border-b border-slate-200 text-[11px] uppercase tracking-wider font-bold text-slate-600">
-                                <th class="px-5 py-4 w-12 text-center">#</th>
-                                <th class="px-5 py-4">Plan Name</th>
-                                <th class="px-5 py-4">Action</th>
-                                <th class="px-5 py-4">Status</th>
-                                <th class="px-5 py-4">Performed By</th>
-                                <th class="px-5 py-4">Date & Time</th>
-                                <th class="px-5 py-4 text-center">Details</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 text-sm font-medium text-slate-800">
-                            <!-- Row 1 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">1</td>
-                                <td class="px-5 py-4 font-semibold">Professional Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Created</span></td>
-                                <td class="px-5 py-4"><span class="text-emerald-600 font-bold">Active</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 24, 2025, 11:20 AM</td>
-                                <td class="px-5 py-4 text-center"><button class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-                            </tr>
-                            <!-- Row 2 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">2</td>
-                                <td class="px-5 py-4 font-semibold">Basic Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-700">Updated</span></td>
-                                <td class="px-5 py-4"><span class="text-emerald-600 font-bold">Active</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 24, 2025, 10:45 AM</td>
-                                <td class="px-5 py-4 text-center"><a href="/admin/plans/edit/5" class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></a></td>
-                            </tr>
-                            <!-- Row 3 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">3</td>
-                                <td class="px-5 py-4 font-semibold">Enterprise Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700">Created</span></td>
-                                <td class="px-5 py-4"><span class="text-emerald-600 font-bold">Active</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025, 04:30 PM</td>
-                                <td class="px-5 py-4 text-center"><button class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-                            </tr>
-                            <!-- Row 4 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">4</td>
-                                <td class="px-5 py-4 font-semibold">Basic Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-orange-100 text-orange-700">Deactivated</span></td>
-                                <td class="px-5 py-4"><span class="text-slate-400 font-bold">Inactive</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 23, 2025, 03:15 PM</td>
-                                <td class="px-5 py-4 text-center"><button class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-                            </tr>
-                            <!-- Row 5 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">5</td>
-                                <td class="px-5 py-4 font-semibold">Professional Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-700">Updated</span></td>
-                                <td class="px-5 py-4"><span class="text-emerald-600 font-bold">Active</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 22, 2025, 02:10 PM</td>
-                                <td class="px-5 py-4 text-center"><button class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-                            </tr>
-                            <!-- Row 6 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">6</td>
-                                <td class="px-5 py-4 font-semibold">Enterprise Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-blue-100 text-blue-700">Updated</span></td>
-                                <td class="px-5 py-4"><span class="text-emerald-600 font-bold">Active</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 21, 2025, 11:05 AM</td>
-                                <td class="px-5 py-4 text-center"><button class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-                            </tr>
-                            <!-- Row 7 -->
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-5 py-4 text-center text-slate-500">7</td>
-                                <td class="px-5 py-4 font-semibold">Premium Plan</td>
-                                <td class="px-5 py-4"><span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-red-100 text-red-700">Deleted</span></td>
-                                <td class="px-5 py-4"><span class="text-red-600 font-bold">Deleted</span></td>
-                                <td class="px-5 py-4 text-slate-600">Super Admin</td>
-                                <td class="px-5 py-4 text-slate-600 text-xs">May 20, 2025, 05:40 PM</td>
-                                <td class="px-5 py-4 text-center"><button class="text-slate-400 hover:text-red-600 transition"><svg class="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <!-- Pagination Footer -->
-                <div class="p-4 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4 bg-white text-sm text-slate-500">
-                    <div class="font-medium">Showing 1 to 10 of 45 entries</div>
-                    <div class="flex items-center space-x-1">
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 transition" disabled>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </button>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-red-600 text-white font-bold shadow-sm">1</button>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">2</button>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">3</button>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">4</button>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 font-bold transition">5</button>
-                        <span class="w-8 h-8 flex items-center justify-center text-slate-400 font-bold">...</span>
-                        <button class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-600 hover:bg-slate-50 transition">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
+                    
+                    <div class="text-center mb-6">
+                        <h3 class="text-lg font-bold text-[#0f172a] mb-1">{{ $plan->name }}</h3>
+                        <p class="text-xs text-[#475569] font-medium h-8">Perfect for your business needs.</p>
+                        <div class="mt-4">
+                            <span class="text-3xl font-black text-[#0f172a]">₹ {{ number_format($plan->price) }}</span>
+                            <span class="text-sm font-semibold text-[#475569]">/ {{ $plan->billing_cycle }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1">
+                        <ul class="space-y-3 mb-8">
+                            @foreach(explode(',', $plan->features) as $feature)
+                            <li class="flex items-start text-sm text-[#475569] font-medium">
+                                <svg class="w-5 h-5 text-[#22C55E] mr-2 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                                <span>{{ trim($feature) }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-auto flex items-center justify-between border-t border-slate-100 pt-4">
+                        <div class="flex-1 bg-emerald-50 text-[#22C55E] text-sm font-bold py-2 rounded-xl text-center mr-2">
+                            Active
+                        </div>
+                        <div class="relative group">
+                            <button class="w-9 h-9 flex items-center justify-center rounded-xl border border-[#e2e8f0] text-[#475569] hover:bg-[#f1f5f9] transition">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                            </button>
+                            <div class="absolute right-0 bottom-full mb-2 w-36 bg-white border border-[#e2e8f0] rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                                <a href="{{ route('plans.edit', $plan->id) }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-[#f1f5f9] font-medium">Edit Plan</a>
+                                <form action="{{ route('plans.destroy', $plan->id) }}" method="POST">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="w-full text-left px-4 py-2 text-sm text-[#b00000] hover:bg-[#f1f5f9] font-medium" onsubmit="return confirm('Delete this plan?');">Delete Plan</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                @empty
+                <div class="col-span-1 md:col-span-3 text-center py-12 bg-white rounded-2xl border border-[#e2e8f0]">
+                    <svg class="w-12 h-12 text-slate-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    <h3 class="text-lg font-bold text-[#0f172a]">No Plans Found</h3>
+                    <p class="text-[#475569] mb-4">Create your first subscription plan to get started.</p>
+                    <a href="{{ route('plans.create') }}" class="inline-flex items-center space-x-2 bg-[#b00000] hover:bg-[#8a0000] text-white px-4 py-2 rounded-xl font-semibold transition">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path></svg>
+                        <span>Create Plan</span>
+                    </a>
+                </div>
+                @endforelse
             </div>
-
+            
+            <div class="flex items-start space-x-3 bg-amber-50 border border-amber-200 rounded-xl p-4 text-amber-700 text-sm font-medium">
+                <svg class="w-5 h-5 shrink-0 text-[#F59E0B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <p>You can reorder plans by dragging. Changes will be reflected to merchants.</p>
+            </div>
         </div>
 @endsection

@@ -1,116 +1,199 @@
 <?php
 
+use App\Http\Controllers\Admin\ClaimController as AdminClaimController;
+use App\Http\Controllers\Admin\CouponController as AdminCouponController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\MerchantController as AdminMerchantController;
+use App\Http\Controllers\Admin\OfferController as AdminOfferController;
+use App\Http\Controllers\Admin\PlanController as AdminPlanController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\ReferralController as AdminReferralController;
+use App\Http\Controllers\Admin\SettingController as AdminSettingController;
+use App\Http\Controllers\CustomerDashboardController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\MerchantAuthController;
+use App\Http\Controllers\MerchantDashboardController;
+use App\Http\Controllers\OtpAuthController;
+use App\Http\Middleware\CheckAdminSession;
+use App\Http\Middleware\CheckCustomerSession;
+use App\Http\Middleware\CheckMerchantSession;
+use App\Models\Faq;
+use App\Models\Setting;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
+// ─── Homepage ────────────────────────────────────────────────────────────────
 Route::get('/', function () {
-    return view('welcome');
+    $faqs = Faq::where('is_active', true)->orderBy('sort_order')->orderBy('id')->get();
+    $settings = Setting::pluck('value', 'key');
+
+    return view('welcome', compact('faqs', 'settings'));
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// ─── Google OAuth ─────────────────────────────────────────────────────────────
+use App\Http\Controllers\GoogleAuthController;
 
-Route::post('/login', function (\Illuminate\Http\Request $request) {
-    $request->merge(['role' => 'customer']);
-    return app(\App\Http\Controllers\OtpAuthController::class)->sendOtp($request);
-});
+Route::get('/auth/google/{role}', [GoogleAuthController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/{role}/callback', [GoogleAuthController::class, 'callback'])->name('google.callback');
 
-Route::get('/register', function () {
+// ─── Customer Auth ────────────────────────────────────────────────────────────
+use App\Http\Controllers\CustomerAuthController;
+
+Route::get('/customer/login', [CustomerAuthController::class, 'showLogin'])->name('login');
+Route::post('/customer/login', [CustomerAuthController::class, 'processLogin']);
+Route::get('/customer/register', function () {
     return view('auth.register');
 });
-
-Route::post('/register', function (\Illuminate\Http\Request $request) {
+Route::post('/customer/register', function (Request $request) {
     $request->merge(['role' => 'customer']);
-    return app(\App\Http\Controllers\OtpAuthController::class)->sendOtp($request);
-});
-Route::post('/verify-otp', [\App\Http\Controllers\OtpAuthController::class, 'verifyOtp'])->name('otp.verify.post');
 
-// Protected Customer Routes
-Route::middleware([\App\Http\Middleware\CheckCustomerSession::class])->group(function () {
-    Route::get('/customer', [\App\Http\Controllers\CustomerDashboardController::class, 'index'])->name('customer.home');
-    Route::get('/customer/scan', [\App\Http\Controllers\CustomerDashboardController::class, 'scan'])->name('customer.scan');
-    Route::get('/customer/after-scan', [\App\Http\Controllers\CustomerDashboardController::class, 'afterScan'])->name('customer.after-scan');
-    Route::get('/customer/rewards', [\App\Http\Controllers\CustomerDashboardController::class, 'rewards'])->name('customer.rewards');
-    Route::get('/customer/profile', [\App\Http\Controllers\CustomerDashboardController::class, 'profile'])->name('customer.profile');
-    Route::get('/customer/logout', [\App\Http\Controllers\CustomerDashboardController::class, 'logout'])->name('customer.logout');
+    return app(OtpAuthController::class)->sendOtp($request);
 });
 
-Route::get('/forgot-password', function () {
-    return view('auth.forgot-password');
+// OTP verify routes
+Route::get('/verify-otp', function () {
+    return view('auth.verify-otp');
+})->name('otp.verify.get');
+Route::post('/verify-otp', [OtpAuthController::class, 'verifyOtp'])->name('otp.verify.post');
+Route::get('/admin/verify-otp', function () {
+    return view('auth.verify-otp');
+});
+Route::post('/admin/verify-otp', [OtpAuthController::class, 'verifyOtp']);
+Route::get('/merchant/verify-otp', function () {
+    return view('merchant.auth.verify');
+});
+Route::post('/merchant/verify-otp', [OtpAuthController::class, 'verifyOtp']);
+
+// ─── Protected Customer Routes ────────────────────────────────────────────────
+Route::middleware([CheckCustomerSession::class])->group(function () {
+    Route::get('/customer', [CustomerDashboardController::class, 'index'])->name('customer.home');
+    Route::get('/customer/scan', [CustomerDashboardController::class, 'scan'])->name('customer.scan');
+    Route::get('/customer/after-scan', [CustomerDashboardController::class, 'afterScan'])->name('customer.after-scan');
+    Route::get('/customer/rewards', [CustomerDashboardController::class, 'rewards'])->name('customer.rewards');
+    Route::get('/customer/claim-reward', [CustomerDashboardController::class, 'claimReward'])->name('customer.claim-reward');
+    Route::get('/customer/status/{type}', [CustomerDashboardController::class, 'showStatus'])->name('customer.status');
+    Route::get('/customer/profile', [CustomerDashboardController::class, 'profile'])->name('customer.profile');
+    Route::post('/customer/profile', [CustomerDashboardController::class, 'updateProfile'])->name('customer.profile.update');
+    Route::get('/customer/logout', [CustomerDashboardController::class, 'logout'])->name('customer.logout');
 });
 
-Route::get('/verify-otp', function () { return view('auth.verify-otp'); })->name('otp.verify.get');
-Route::get('/admin/verify-otp', function () { return view('auth.verify-otp'); });
-Route::get('/merchant/verify-otp', function () { return view('merchant.auth.verify'); });
+// ─── Password Reset ───────────────────────────────────────────────────────────
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendOtp'])->name('password.email');
+Route::get('/forgot-password/verify', [ForgotPasswordController::class, 'showVerifyForm'])->name('password.verify');
+Route::post('/forgot-password/verify', [ForgotPasswordController::class, 'verifyOtp'])->name('password.verify.post');
+Route::get('/reset-password', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
 
-Route::post('/verify-otp', [\App\Http\Controllers\OtpAuthController::class, 'verifyOtp'])->name('otp.verify.post');
-Route::post('/admin/verify-otp', [\App\Http\Controllers\OtpAuthController::class, 'verifyOtp']);
-Route::post('/merchant/verify-otp', [\App\Http\Controllers\OtpAuthController::class, 'verifyOtp']);
-
-Route::get('/reset-password', function () {
-    return view('auth.reset-password');
-});
-
+// ─── Admin Login (direct password) ───────────────────────────────────────────
 Route::get('/admin', function () {
+    if (session('admin_logged_in')) {
+        return redirect('/admin/dashboard');
+    }
+
     return view('admin.login');
 });
 
-Route::post('/admin', function (\Illuminate\Http\Request $request) {
-    $request->merge(['role' => 'admin']);
-    return app(\App\Http\Controllers\OtpAuthController::class)->sendOtp($request);
+Route::post('/admin', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string',
+    ]);
+
+    // For local testing: allow ANY email/password to login as admin.
+    // If the user doesn't exist, create them on the fly.
+    $user = User::firstOrCreate(
+        ['email' => $request->email],
+        [
+            'name' => 'Admin User',
+            'password' => Hash::make($request->password),
+            'role' => 'admin',
+        ]
+    );
+
+    // Ensure the user has the admin role just in case
+    if ($user->role !== 'admin') {
+        $user->update(['role' => 'admin']);
+    }
+
+    Auth::login($user);
+    session(['admin_logged_in' => true]);
+    $request->session()->regenerate();
+
+    return redirect('/admin/dashboard');
 });
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
+// ─── Protected Admin Routes ───────────────────────────────────────────────────
+Route::middleware([CheckAdminSession::class])->group(function () {
+    Route::get('/admin/logout', function () {
+        Auth::logout();
+        session()->flush();
+
+        return redirect('/');
+    })->name('admin.logout');
+
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index']);
+
+    Route::patch('/admin/merchants/{merchant}/status', [AdminMerchantController::class, 'updateStatus'])->name('admin.merchants.status');
+    Route::patch('/admin/merchants/{merchant}/extend', [AdminMerchantController::class, 'extendValidity'])->name('admin.merchants.extend');
+    Route::resource('/admin/merchants', AdminMerchantController::class);
+    Route::redirect('/admin/plan', '/admin/plans');
+    Route::get('/admin/plans/history', [AdminPlanController::class, 'history'])->name('plans.history');
+    Route::resource('/admin/plans', AdminPlanController::class);
+    Route::patch('/admin/customers/{customer}/status', [AdminCustomerController::class, 'updateStatus'])->name('admin.customers.status');
+    Route::resource('/admin/customers', AdminCustomerController::class);
+
+    Route::resource('/admin/claims', AdminClaimController::class);
+    Route::resource('/admin/offers', AdminOfferController::class);
+    Route::resource('/admin/referrals', AdminReferralController::class);
+    Route::resource('/admin/coupons', AdminCouponController::class);
+
+    Route::get('/admin/settings', [AdminSettingController::class, 'index']);
+    Route::post('/admin/settings', [AdminSettingController::class, 'update']);
+    Route::get('/admin/settings/platform', [AdminSettingController::class, 'platform']);
+    Route::get('/admin/settings/contact', [AdminSettingController::class, 'contact']);
+    Route::get('/admin/settings/brand', [AdminSettingController::class, 'brand']);
+    Route::get('/admin/settings/privacy-policy', [AdminSettingController::class, 'privacyPolicy']);
+    Route::get('/admin/settings/terms', [AdminSettingController::class, 'termsConditions']);
+    Route::get('/admin/settings/faq', [AdminSettingController::class, 'faq'])->name('admin.faq.index');
+    Route::post('/admin/settings/faq', [AdminSettingController::class, 'faqStore'])->name('admin.faq.store');
+    Route::put('/admin/settings/faq/{faq}', [AdminSettingController::class, 'faqUpdate'])->name('admin.faq.update');
+    Route::delete('/admin/settings/faq/{faq}', [AdminSettingController::class, 'faqDestroy'])->name('admin.faq.destroy');
+
+    Route::get('/admin/profile', [AdminProfileController::class, 'index']);
+    Route::post('/admin/profile', [AdminProfileController::class, 'update']);
 });
 
-Route::get('/admin/merchants', function () {
-    return view('admin.merchants.index');
-});
+// ─── Merchant Auth ────────────────────────────────────────────────────────────
 
-Route::get('/admin/merchants/view/{id}', function ($id) {
-    return view('admin.merchants.show', ['id' => $id]);
-});
+Route::get('/merchant/login', [MerchantAuthController::class, 'showLogin'])->name('merchant.login');
+Route::post('/merchant/login', [MerchantAuthController::class, 'processLogin']);
+Route::get('/merchant/register', [MerchantAuthController::class, 'showRegister'])->name('merchant.register');
+Route::post('/merchant/register', [MerchantAuthController::class, 'processRegister']);
+Route::get('/merchant/verify', [MerchantAuthController::class, 'showVerify'])->name('merchant.verify');
+Route::post('/merchant/verify', [MerchantAuthController::class, 'processVerify']);
+Route::post('/merchant/resend-otp', [MerchantAuthController::class, 'resendOtp'])->name('merchant.resend-otp');
+Route::get('/merchant/account-created', [MerchantAuthController::class, 'showCreated'])->name('merchant.created');
+Route::post('/merchant/proceed-batch2', [MerchantAuthController::class, 'proceedToBatch2'])->name('merchant.proceed-batch2');
+Route::get('/merchant/business-info', [MerchantAuthController::class, 'showBusinessInfo'])->name('merchant.business-info');
+Route::post('/merchant/business-info', [MerchantAuthController::class, 'processBusinessInfo']);
+Route::get('/merchant/business-address', [MerchantAuthController::class, 'showBusinessAddress'])->name('merchant.business-address');
+Route::post('/merchant/business-address', [MerchantAuthController::class, 'processBusinessAddress']);
+Route::get('/merchant/setup-complete', [MerchantAuthController::class, 'showSetupComplete'])->name('merchant.setup-complete');
+Route::get('/merchant/logout', [MerchantAuthController::class, 'logout'])->name('merchant.logout');
 
-Route::get('/admin/plans', function () {
-    return view('admin.plans.index');
-});
-
-Route::redirect('/admin/plan', '/admin/plans');
-
-Route::get('/admin/plans/create', function () {
-    return view('admin.plans.create');
-});
-
-Route::get('/admin/plans/edit/{id}', function ($id) {
-    return view('admin.plans.edit', ['id' => $id]);
-});
-
-Route::get('/admin/claims', function () { return view('admin.claims'); });
-Route::get('/admin/settings', function () { return view('admin.settings'); });
-Route::get('/admin/settings/platform', function () { return view('admin.settings.platform'); });
-Route::get('/admin/settings/contact', function () { return view('admin.settings.contact'); });
-Route::get('/admin/settings/brand', function () { return view('admin.settings.brand'); });
-Route::get('/admin/settings/faq', function () { return view('admin.settings.faq'); });
-Route::get('/admin/profile', function () { return view('admin.profile'); });
-
-// Merchant Auth Routes
-Route::get('/merchant/login', [\App\Http\Controllers\MerchantDashboardController::class, 'showLogin'])->name('merchant.login');
-Route::post('/merchant/login', function (\Illuminate\Http\Request $request) {
-    $request->merge(['role' => 'merchant']);
-    return app(\App\Http\Controllers\OtpAuthController::class)->sendOtp($request);
-});
-Route::get('/merchant/register', [\App\Http\Controllers\MerchantDashboardController::class, 'showRegister'])->name('merchant.register');
-Route::post('/merchant/register', [\App\Http\Controllers\MerchantDashboardController::class, 'processRegister']);
-Route::get('/merchant/verify', [\App\Http\Controllers\MerchantDashboardController::class, 'showVerify'])->name('merchant.verify');
-Route::post('/merchant/verify', [\App\Http\Controllers\MerchantDashboardController::class, 'processVerify']);
-Route::get('/merchant/account-created', [\App\Http\Controllers\MerchantDashboardController::class, 'showCreated'])->name('merchant.created');
-Route::get('/merchant/logout', [\App\Http\Controllers\MerchantDashboardController::class, 'logout'])->name('merchant.logout');
-
-// Protected Merchant Routes
-Route::middleware([\App\Http\Middleware\CheckMerchantSession::class])->group(function () {
-    Route::get('/merchant', [\App\Http\Controllers\MerchantDashboardController::class, 'index'])->name('merchant.dashboard');
-    Route::get('/merchant/profile', [\App\Http\Controllers\MerchantDashboardController::class, 'profile'])->name('merchant.profile');
-    Route::get('/merchant/rewards', [\App\Http\Controllers\MerchantDashboardController::class, 'rewards'])->name('merchant.rewards');
-    Route::get('/merchant/create-offer', [\App\Http\Controllers\MerchantDashboardController::class, 'createOffer'])->name('merchant.create-offer');
+// ─── Protected Merchant Routes ────────────────────────────────────────────────
+Route::middleware([CheckMerchantSession::class])->group(function () {
+    Route::get('/merchant', [MerchantDashboardController::class, 'index'])->name('merchant.dashboard');
+    Route::get('/merchant/profile', [MerchantDashboardController::class, 'profile'])->name('merchant.profile');
+    Route::post('/merchant/profile', [MerchantDashboardController::class, 'updateProfile'])->name('merchant.profile.update');
+    Route::post('/merchant/profile/auto-approve', [MerchantDashboardController::class, 'updateAutoApproval'])->name('merchant.profile.auto-approve');
+    Route::get('/merchant/rewards', [MerchantDashboardController::class, 'rewards'])->name('merchant.rewards');
+    Route::post('/merchant/rewards/{id}/status', [MerchantDashboardController::class, 'updateRewardStatus'])->name('merchant.rewards.status');
+    Route::get('/merchant/create-offer', [MerchantDashboardController::class, 'createOffer'])->name('merchant.create-offer');
+    Route::post('/merchant/create-offer', [MerchantDashboardController::class, 'storeOffer'])->name('merchant.create-offer.store');
 });

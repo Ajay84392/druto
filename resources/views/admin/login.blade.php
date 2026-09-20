@@ -3,200 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeAurex Admin Panel - Login</title>
+    <title>Admin Login - BeAurex</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
     <link rel="icon" type="image/jpeg" href="/favicon.jpg">
+    <style>
+        body { font-family: "Inter", sans-serif; }
+        input:focus { outline: none; border-color: #b00000; box-shadow: 0 0 0 3px rgba(176,0,0,0.08); }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex items-center justify-center p-4 sm:p-8">
+<body class="bg-[#f1f5f9] text-[#0f172a] antialiased min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-sm">
+        <div class="bg-white rounded-2xl border border-[#e2e8f0] shadow-sm overflow-hidden mb-4">
 
-    <div class="max-w-6xl w-full bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row min-h-[600px] border border-slate-100">
-        
-        <!-- Left Sidebar (Red Brand Area) -->
-        <div class="md:w-5/12 bg-gradient-to-br from-[#c90000] to-[#8a0000] text-white p-10 flex flex-col relative overflow-hidden">
-            <!-- Background Pattern overlay -->
-            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
-            
-            <div class="relative z-10 flex-1 flex flex-col">
-                <!-- Logo area -->
-                <div class="flex items-center space-x-3 mb-16">
-                    <div class="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
-                        <!-- Custom QR Logo SVG placeholder based on design -->
-                        <svg class="w-8 h-8 text-[#c90000]" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm12 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zm-6-6h4v4h-4v-4z"/></svg>
-                    </div>
-                    <div>
-                        <div class="text-2xl font-black leading-tight tracking-tight">BeAurex</div>
-                        <div class="text-sm font-medium text-red-100">Admin Panel</div>
-                    </div>
-                </div>
-
-                <div>
-                    <h1 class="text-4xl font-bold mb-4">Welcome Back!</h1>
-                    <p class="text-red-100 mb-12 max-w-sm text-sm leading-relaxed">
-                        Sign in to your BeAurex Admin Panel and manage your entire platform.
-                    </p>
-
-                    <div class="space-y-8">
-                        <!-- Feature 1 -->
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-white text-[#c90000] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white mb-1 text-sm">Secure & Reliable</h3>
-                                <p class="text-xs text-red-100 leading-relaxed font-medium">Enterprise-grade security to keep your data safe and protected.</p>
-                            </div>
-                        </div>
-
-                        <!-- Feature 2 -->
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-white text-[#c90000] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white mb-1 text-sm">Real-time Insights</h3>
-                                <p class="text-xs text-red-100 leading-relaxed font-medium">Track platform performance and growth in real-time.</p>
-                            </div>
-                        </div>
-
-                        <!-- Feature 3 -->
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-white text-[#c90000] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white mb-1 text-sm">Complete Control</h3>
-                                <p class="text-xs text-red-100 leading-relaxed font-medium">Manage merchants, customers, plans, rewards, claims and more.</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Feature 4 -->
-                        <div class="flex items-start space-x-4">
-                            <div class="w-8 h-8 rounded-full bg-white text-[#c90000] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-white mb-1 text-sm">Always Accessible</h3>
-                                <p class="text-xs text-red-100 leading-relaxed font-medium">Access your dashboard anytime, anywhere with secure login.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-auto pt-10">
-                    <p class="text-xs text-red-200">&copy; 2025 BeAurex. All rights reserved.</p>
-                </div>
+            <!-- Slate top section -->
+            <div class="flex flex-col items-center pt-6 pb-4 px-8" style="background:#f8fafc">
+                <h2 class="text-xl font-black text-[#0f172a] mb-1 text-center">Welcome Back!</h2>
+                <p class="text-xs font-medium text-[#475569] text-center">Login to manage the platform</p>
             </div>
-        </div>
-
-        <!-- Right Login Area -->
-        <div class="md:w-7/12 p-10 lg:p-16 flex flex-col justify-center bg-white relative">
             
-            <div class="max-w-md w-full mx-auto">
-                <!-- Mobile Logo (hidden on desktop) -->
-                <div class="md:hidden flex items-center justify-center space-x-3 mb-10">
-                    <img src="/images/logo.jpg" alt="BeAurex Logo" class="w-10 h-10 rounded-xl shadow-lg object-cover">
-                    <div class="text-center">
-                        <div class="text-2xl font-black text-slate-900 leading-tight tracking-tight">BeAurex</div>
-                        <div class="text-xs font-medium text-slate-500">Admin Panel</div>
-                    </div>
+            <div class="p-8 pt-6">
+                <!-- Heading -->
+                <div class="text-center mb-7">
+                    <h2 class="text-2xl font-black text-[#0f172a] mb-1.5">BeAurex</h2>
+                    <p class="text-[#475569] text-sm font-medium leading-relaxed">Admin Portal</p>
                 </div>
 
-                <!-- Desktop centered logo area -->
-                <div class="hidden md:flex flex-col items-center justify-center mb-10">
-                    <div class="flex items-center space-x-3">
-                        <img src="/images/logo.jpg" alt="BeAurex Logo" class="w-12 h-12 rounded-xl shadow-lg object-cover">
-                        <div>
-                            <div class="text-2xl font-black text-slate-900 leading-tight tracking-tight">BeAurex</div>
-                            <div class="text-sm font-medium text-slate-500">Admin Panel</div>
-                        </div>
-                    </div>
+                <!-- Alerts -->
+                @if(session('status'))
+                <div class="mb-5 bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 flex items-start space-x-2.5">
+                    <svg class="w-4 h-4 text-[#22C55E] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    <p class="text-sm text-emerald-700 font-medium">{{ session('status') }}</p>
+                </div>
+                @endif
+                @if($errors->any())
+                <div class="mb-5 bg-red-50 border border-red-200 rounded-xl p-3.5 flex items-start space-x-2.5">
+                    <svg class="w-4 h-4 text-[#EF4444] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <p class="text-sm text-[#8a0000] font-medium">{{ $errors->first() }}</p>
+                </div>
+                @endif
+
+                <div class="mb-5">
+                    <p class="text-lg font-bold text-center text-[#0f172a]">Sign in to your account</p>
+                    <p class="text-xs font-medium text-slate-500 text-center mt-1">Enter your credentials to continue</p>
                 </div>
 
-                <div class="text-center mb-10">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Sign in to your account</h2>
-                    <p class="text-sm text-slate-500 font-medium">Enter your credentials to continue</p>
-                </div>
-
-                <form action="#" method="POST" class="space-y-5">
+                <!-- Login Form -->
+                <form action="{{ url('/admin') }}" method="POST" class="space-y-4">
                     @csrf
-                    
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-xs font-bold text-slate-700 mb-1.5">Email Address</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path></svg>
-                            </div>
-                            <input type="email" id="email" name="email" class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-[#c90000] focus:border-[#c90000] transition text-sm text-slate-900" placeholder="Enter your email address" required>
-                        </div>
-                    </div>
 
-                    <!-- Mobile -->
+                    <!-- Email Address -->
                     <div>
-                        <label for="mobile" class="block text-xs font-bold text-slate-700 mb-1.5">Mobile Number</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"></path></svg>
-                            </div>
-                            <input type="tel" id="mobile" name="mobile" class="w-full pl-10 pr-4 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-[#c90000] focus:border-[#c90000] transition text-sm text-slate-900" placeholder="Enter your mobile number" required>
-                        </div>
+                        <label class="block text-xs font-semibold text-[#475569] mb-1">Email Address</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            placeholder="Enter your email"
+                            required
+                            class="w-full bg-white border border-[#e2e8f0] rounded-xl px-3.5 py-2.5 text-sm font-medium text-[#0f172a] placeholder-slate-400 transition focus:outline-none focus:border-[#b00000]"
+                        >
                     </div>
 
                     <!-- Password -->
                     <div>
-                        <label for="password" class="block text-xs font-bold text-slate-700 mb-1.5">Password</label>
+                        <label class="block text-xs font-semibold text-[#475569] mb-1">Password</label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                                <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
-                            </div>
-                            <input type="password" id="password" name="password" class="w-full pl-10 pr-10 py-3 rounded-lg border border-slate-300 focus:outline-none focus:ring-1 focus:ring-[#c90000] focus:border-[#c90000] transition text-sm text-slate-900" placeholder="Enter your password" required>
-                            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center cursor-pointer">
-                                <svg class="h-5 w-5 text-slate-400 hover:text-slate-600 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            </div>
+                            <input
+                                type="password"
+                                name="password"
+                                id="adminPassword"
+                                placeholder="Enter your password"
+                                required
+                                class="w-full bg-white border border-[#e2e8f0] rounded-xl px-3.5 py-2.5 pr-10 text-sm font-medium text-[#0f172a] placeholder-slate-400 transition focus:outline-none focus:border-[#b00000]"
+                            >
+                            <button type="button" onclick="togglePwd('adminPassword', 'eyeShow', 'eyeHide')" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-600">
+                                <svg id="eyeShow" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                                <svg id="eyeHide" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path></svg>
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Remember & Forgot -->
+                    <!-- Remember Me & Forgot Password -->
                     <div class="flex items-center justify-between pt-1">
-                        <div class="flex items-center">
-                            <input type="checkbox" id="remember" name="remember" class="w-4 h-4 text-[#c90000] border-slate-300 rounded focus:ring-[#c90000]">
-                            <label for="remember" class="ml-2 block text-xs font-bold text-slate-700">Remember me</label>
-                        </div>
-                        <a href="#" class="text-xs font-bold text-[#c90000] hover:text-[#a00000] transition">Forgot Password?</a>
+                        <label class="flex items-center space-x-2 cursor-pointer">
+                            <input type="checkbox" name="remember" class="w-3.5 h-3.5 rounded border-[#e2e8f0] focus:ring-0" style="accent-color:#b00000">
+                            <span class="text-xs font-medium text-[#475569]">Remember me</span>
+                        </label>
+                        <a href="/forgot-password" class="text-xs font-bold text-[#b00000] hover:underline">Forgot Password?</a>
                     </div>
 
                     <!-- Login Button -->
-                    <button type="submit" class="w-full bg-[#cc0000] hover:bg-[#a30000] text-white font-bold py-3.5 rounded-lg transition text-sm mt-4 flex items-center justify-center space-x-2 shadow-sm">
-                        <span>Login</span>
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                    </button>
-                    
-                    <!-- Divider -->
-                    <div class="relative flex py-2 items-center">
-                        <div class="flex-grow border-t border-slate-200"></div>
-                        <span class="flex-shrink-0 mx-4 text-slate-400 text-xs">or</span>
-                        <div class="flex-grow border-t border-slate-200"></div>
+                    <div class="pt-2">
+                        <button
+                            type="submit"
+                            class="w-full text-white font-bold py-3.5 rounded-xl text-sm transition"
+                            style="background:#b00000"
+                            onmouseover="this.style.background='#8a0000'"
+                            onmouseout="this.style.background='#b00000'"
+                        >
+                            Login
+                        </button>
                     </div>
-
-                    <!-- Secure Access Button -->
-                    <button type="button" class="w-full bg-white hover:bg-slate-50 border border-slate-200 text-[#cc0000] font-bold py-3.5 rounded-lg transition text-sm flex items-center justify-center space-x-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                        <span>Secure Admin Access</span>
-                    </button>
-                    
-                    <div class="text-center mt-6">
-                        <p class="text-xs text-slate-500">By logging in, you agree to our <a href="#" class="text-[#c90000] hover:underline">Terms & Conditions</a> and <a href="#" class="text-[#c90000] hover:underline">Privacy Policy</a>.</p>
-                    </div>
-
                 </form>
             </div>
         </div>
-
+        
+        <!-- Footer terms -->
+        <div class="text-center">
+            <p class="text-sm font-bold text-slate-700 mb-1">Secure Admin Access</p>
+            <p class="text-xs font-medium text-slate-500">By logging in, you agree to our <a href="#" class="text-[#b00000] hover:underline font-bold">Terms &amp; Conditions</a> and <a href="#" class="text-[#b00000] hover:underline font-bold">Privacy Policy</a>.</p>
+        </div>
     </div>
-
+    
+    <script>
+        function togglePwd(inputId, showId, hideId) {
+            const input = document.getElementById(inputId);
+            const show  = document.getElementById(showId);
+            const hide  = document.getElementById(hideId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                show.classList.add('hidden');
+                hide.classList.remove('hidden');
+            } else {
+                input.type = 'password';
+                show.classList.remove('hidden');
+                hide.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>

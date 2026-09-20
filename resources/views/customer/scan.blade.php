@@ -1,51 +1,36 @@
 @extends('layouts.customer')
 
 @section('content')
-<div class="bg-slate-900 md:rounded-[2rem] md:shadow-2xl overflow-hidden min-h-[calc(100vh-5rem)] md:min-h-[700px] relative pb-24 md:pb-0 flex flex-col border border-slate-800">
+<div class="bg-[#1e293b] md:bg-transparent min-h-screen md:min-h-0 relative pb-24 md:pb-0 flex flex-col">
     
     <!-- Top Bar -->
-    <div class="px-6 pt-12 pb-4 md:pt-8 md:px-10 flex justify-between items-center text-white relative z-20">
-        <a href="/customer" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition cursor-pointer backdrop-blur-sm border border-white/5">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+    <div class="px-6 pt-10 pb-4 md:pt-6 md:pb-6 md:px-8 flex items-center justify-between text-white md:bg-white md:text-slate-900 md:rounded-t-[2rem] z-20">
+        <a href="/customer" class="w-10 h-10 -ml-2 md:ml-0 rounded-full flex items-center justify-center hover:bg-white/10 md:hover:bg-slate-100 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
         </a>
-        <h1 class="text-xl md:text-2xl font-bold tracking-wide">Scan QR Code</h1>
-        <button class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition cursor-pointer backdrop-blur-sm border border-white/5">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+        <h1 class="text-base font-black tracking-tight">Scan QR Code</h1>
+        <button id="flash-toggle" class="w-10 h-10 -mr-2 md:mr-0 rounded-full flex items-center justify-center hover:bg-white/10 md:hover:bg-slate-100 transition focus:outline-none hidden">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
         </button>
     </div>
 
-    <!-- Instructions -->
-    <div class="text-center px-8 relative z-20 mt-4 md:mt-8 mb-8 md:mb-16">
-        <p class="text-slate-300 text-base md:text-lg font-medium">Position the QR code within the frame<br class="md:hidden"> to collect your stamp</p>
-    </div>
-
-    <!-- Scanner Frame -->
-    <div class="flex-1 flex justify-center items-center relative z-20 px-8 pb-12">
-        <!-- Simulate Camera View (Wider for Web) -->
-        <div class="absolute inset-0 bg-slate-800/50 backdrop-blur-sm -z-10"></div>
-        <div class="absolute inset-0 flex items-center justify-center -z-20">
-             <div class="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-600 via-slate-900 to-black opacity-80"></div>
-        </div>
-
-        <!-- The Red Scanner Box -->
-        <a href="/customer/after-scan" class="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center cursor-pointer group">
-            <!-- Corners -->
-            <div class="absolute top-0 left-0 w-16 h-16 md:w-20 md:h-20 border-t-8 border-l-8 border-[#900000] rounded-tl-2xl"></div>
-            <div class="absolute top-0 right-0 w-16 h-16 md:w-20 md:h-20 border-t-8 border-r-8 border-[#900000] rounded-tr-2xl"></div>
-            <div class="absolute bottom-0 left-0 w-16 h-16 md:w-20 md:h-20 border-b-8 border-l-8 border-[#900000] rounded-bl-2xl"></div>
-            <div class="absolute bottom-0 right-0 w-16 h-16 md:w-20 md:h-20 border-b-8 border-r-8 border-[#900000] rounded-br-2xl"></div>
+    <!-- Scanner Content -->
+    <div class="flex-1 flex flex-col items-center justify-center px-6 relative">
+        <p class="text-xs font-semibold text-slate-300 md:text-slate-500 mb-8 text-center max-w-[200px]">Position the QR code within the frame to collect stamp</p>
+        
+        <!-- Scanner Frame Wrapper -->
+        <div class="relative w-64 h-64 md:w-72 md:h-72 mb-12">
+            <!-- The QR Scanner Div -->
+            <div id="reader" class="w-full h-full rounded-2xl overflow-hidden shadow-2xl relative z-10 bg-black"></div>
             
-            <!-- Scanning Line Animation -->
-            <div class="absolute top-0 left-0 w-full h-1 bg-[#900000] shadow-[0_0_15px_5px_rgba(144,0,0,0.5)] animate-[scan_2s_ease-in-out_infinite]"></div>
-
-            <!-- Fake QR Code inside for prototype -->
-            <div class="w-48 h-48 md:w-64 md:h-64 bg-white p-3 rounded-xl opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-300 shadow-2xl">
-                <svg class="w-full h-full text-slate-800" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z M8 18h2v2H8z M18 8h2v2h-2z M8 8h2v2H8z M18 18h2v2h-2z"/></svg>
+            <!-- Red Scanner Corners Decoration -->
+            <div class="absolute -inset-4 border-2 border-transparent z-20 pointer-events-none">
+                <div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-[#b00000] rounded-tl-xl"></div>
+                <div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-[#b00000] rounded-tr-xl"></div>
+                <div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-[#b00000] rounded-bl-xl"></div>
+                <div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-[#b00000] rounded-br-xl"></div>
             </div>
             
-            <div class="absolute -bottom-16 text-white/50 text-sm font-semibold tracking-wider">(Click here to simulate a successful scan)</div>
-        </a>
-    </div>
 
 </div>
 
@@ -56,3 +41,34 @@
     }
 </style>
 @endsection
+
+
+@section('scripts')
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const html5QrCode = new Html5Qrcode("reader");
+        const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+            html5QrCode.stop().then(() => {
+                window.location.href = '/customer/after-scan?code=' + encodeURIComponent(decodedText);
+            }).catch(err => {
+                console.log(err);
+            });
+        };
+        const config = { fps: 10, qrbox: { width: 250, height: 250 }, aspectRatio: 1.0 };
+        html5QrCode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback)
+            .catch(err => {
+                console.log("Error starting scanner:", err);
+                html5QrCode.start({ facingMode: "user" }, config, qrCodeSuccessCallback)
+                    .catch(e => console.log(e));
+            });
+    });
+</script>
+<style>
+    #reader { border: none !important; }
+    #reader video { object-fit: cover; }
+    #reader__dashboard_section_csr span { color: white !important; font-size: 12px; }
+    #reader__dashboard_section_swaplink { display: none !important; }
+</style>
+@endsection
+

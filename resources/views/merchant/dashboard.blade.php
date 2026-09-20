@@ -3,129 +3,159 @@
 @section('title', 'Merchant Dashboard')
 
 @section('content')
-<div class="flex-1 overflow-auto p-6 md:p-10">
-
-        
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-black text-slate-900">Overview</h1>
-            <select class="bg-white border border-slate-200 text-slate-700 text-sm rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-1 focus:ring-[#900000]">
-                <option>This Month</option>
-                <option>Last Month</option>
-                <option>This Year</option>
-            </select>
-        </div>
-
-        <!-- 4 Stats Cards Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            <!-- Total Scans -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-[#900000]">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    </div>
-                    <div class="text-sm font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-md">+18.5%</div>
+<div class="bg-slate-50 md:bg-transparent min-h-screen md:min-h-0 relative pb-24 md:pb-0">
+    
+    <!-- Red Header Section -->
+    <div class="bg-[#8a0000] px-6 pt-10 pb-20 md:pb-24 text-white relative">
+        <div class="flex justify-between items-start mb-6">
+            <div class="flex items-center space-x-4">
+                <!-- Store Logo -->
+                <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-sm">
+                    <svg class="w-7 h-7 text-[#b00000]" fill="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                 </div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Scans</p>
-                <div class="text-3xl font-black text-slate-900">{{ number_format($totalScans) }}</div>
-            </div>
-            
-            <!-- Total Customers -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    </div>
-                    <div class="text-sm font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-md">+12.3%</div>
-                </div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Customers</p>
-                <div class="text-3xl font-black text-slate-900">{{ number_format($totalCustomers) }}</div>
-            </div>
-
-            <!-- Rewards Redeemed -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
-                    </div>
-                    <div class="text-sm font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-md">+15.7%</div>
-                </div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Rewards Redeemed</p>
-                <div class="text-3xl font-black text-slate-900">{{ number_format($rewardsRedeemed) }}</div>
-            </div>
-
-            <!-- Repeat Rate -->
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-500">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                    </div>
-                    <div class="text-sm font-bold text-emerald-500 bg-emerald-50 px-2 py-1 rounded-md">+8.2%</div>
-                </div>
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Repeat Rate</p>
-                <div class="text-3xl font-black text-slate-900">{{ $repeatRate }}%</div>
-            </div>
-        </div>
-
-        <!-- Two Column Layout for QR and Plan -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- QR Code Card (Takes 2 cols on wide screens) -->
-            <div class="lg:col-span-2 bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 flex flex-col md:flex-row items-center md:items-start md:space-x-8">
-                
-                <div class="flex-shrink-0 mb-6 md:mb-0">
-                    <div class="w-48 h-48 bg-slate-50 rounded-2xl flex items-center justify-center p-3 relative overflow-hidden border border-slate-200">
-                        <div class="w-full h-full" style="background-image: repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), repeating-linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000); background-position: 0 0, 8px 8px; background-size: 16px 16px;"></div>
-                        <div class="absolute inset-0 m-auto w-12 h-12 bg-[#900000] rounded-lg flex items-center justify-center shadow-xl border-4 border-white">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="flex-1 text-center md:text-left">
-                    <h3 class="text-2xl font-black text-slate-900 tracking-tight mb-2">Your Business QR Code</h3>
-                    <p class="text-slate-500 font-medium mb-8">Place this code at your checkout counter. Customers simply scan it to collect their loyalty stamps securely without an app.</p>
-                    
-                    <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
-                        <button class="w-full sm:w-auto px-6 bg-[#900000] hover:bg-[#7a0000] text-white font-bold py-3.5 rounded-xl shadow-md transition flex justify-center items-center space-x-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            <span>Download Full HQ</span>
-                        </button>
-                        <button class="w-full sm:w-auto px-6 bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold py-3.5 rounded-xl transition flex justify-center items-center space-x-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-                            <span>Print Directly</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Side Card: Active Plan -->
-            <div class="bg-gradient-to-br from-slate-900 to-[#900000] rounded-[2rem] p-8 shadow-xl text-white flex flex-col justify-between">
                 <div>
-                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm mb-6 shadow-sm">
-                        <span class="text-2xl">👑</span>
+                    <h2 class="text-xl font-black tracking-tight">Ka-feen Café</h2>
+                    <div class="flex items-center space-x-2 mt-1">
+                        <span class="bg-white text-green-600 text-[9px] font-black uppercase px-2 py-0.5 rounded-full shadow-sm tracking-wide">Active Plan</span>
+                        <span class="bg-[#710000] text-white border border-red-500 text-[9px] font-black uppercase px-2 py-0.5 rounded-full tracking-wide">Pro Plan</span>
                     </div>
-                    <h4 class="text-xl font-black mb-2">Pro Plan Active</h4>
-                    <p class="text-slate-200 text-sm font-medium leading-relaxed">Your business has full access to the premium retention suite.</p>
-                </div>
-                
-                <div class="mt-8">
-                    <div class="bg-white/10 rounded-xl p-4 border border-white/20 flex items-center justify-between">
-                        <div>
-                            <div class="text-xs text-slate-300 font-bold mb-1">Renews On</div>
-                            <div class="font-bold">20 Aug 2026</div>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-xs text-slate-300 font-bold mb-1">Pricing</div>
-                            <div class="font-bold">₹999 / yr</div>
-                        </div>
-                    </div>
-                    <button class="w-full mt-4 bg-white text-[#900000] hover:bg-slate-100 font-bold py-3 rounded-xl transition shadow-md">
-                        Manage Billing
-                    </button>
                 </div>
             </div>
-
+            
+            <!-- Profile Avatar (Visible on Mobile) -->
+            <a href="/merchant/profile" class="w-10 h-10 rounded-full border border-red-400/50 flex items-center justify-center hover:bg-white/10 transition md:hidden shrink-0">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"></path></svg>
+            </a>
         </div>
     </div>
-@endsection
 
+    <!-- Main Content Wrapper (Overlapping the red header) -->
+    <div class="bg-slate-50 md:bg-transparent rounded-t-3xl -mt-8 relative z-20 px-4 md:px-8">
+        
+        <div class="pt-6 max-w-[1600px] mx-auto">
+            
+            <div class="flex justify-between items-center mb-5 px-2">
+                <h2 class="text-lg font-black text-slate-900 tracking-tight">Overview</h2>
+                <div class="flex items-center text-[11px] font-bold text-slate-500 cursor-pointer">
+                    This Month
+                    <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+            </div>
+
+            <!-- 4 Stats Cards Grid -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <!-- Total Scans -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex flex-col items-center text-center justify-center py-6 transition">
+                    <div class="flex justify-center items-center w-full space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-red-50 text-[#dc2626] flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <span class="text-[11px] font-semibold text-[#64748b]">Total Scans</span>
+                    </div>
+                    <div class="text-2xl font-black text-[#0f172a] leading-none mb-1.5">{{ number_format($totalScans) }}</div>
+                    <div class="text-[10px] font-bold text-[#16a34a] flex items-center justify-center gap-0.5">
+                        +18.5% 
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Total Customers -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex flex-col items-center text-center justify-center py-6 transition">
+                    <div class="flex justify-center items-center w-full space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-purple-50 text-[#9333ea] flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
+                        <span class="text-[11px] font-semibold text-[#64748b]">Total Customers</span>
+                    </div>
+                    <div class="text-2xl font-black text-[#0f172a] leading-none mb-1.5">{{ number_format($totalCustomers) }}</div>
+                    <div class="text-[10px] font-bold text-[#16a34a] flex items-center justify-center gap-0.5">
+                        +12.3% 
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Rewards Redeemed -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex flex-col items-center text-center justify-center py-6 transition">
+                    <div class="flex justify-center items-center w-full space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-[#16a34a] flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                        </div>
+                        <span class="text-[11px] font-semibold text-[#64748b]">Rewards Redeemed</span>
+                    </div>
+                    <div class="text-2xl font-black text-[#0f172a] leading-none mb-1.5">{{ number_format($rewardsRedeemed) }}</div>
+                    <div class="text-[10px] font-bold text-[#16a34a] flex items-center justify-center gap-0.5">
+                        +15.7% 
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
+                    </div>
+                </div>
+
+                <!-- Repeat Rate -->
+                <div class="bg-white rounded-2xl p-4 shadow-sm border border-[#e2e8f0] flex flex-col items-center text-center justify-center py-6 transition">
+                    <div class="flex justify-center items-center w-full space-x-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                        </div>
+                        <span class="text-[11px] font-semibold text-[#64748b]">Repeat Rate</span>
+                    </div>
+                    <div class="text-2xl font-black text-[#0f172a] leading-none mb-1.5">{{ round($repeatRate) }}%</div>
+                    <div class="text-[10px] font-bold text-[#16a34a] flex items-center justify-center gap-0.5">
+                        +8.2% 
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- One Column Layout for QR -->
+            <div class="grid grid-cols-1 gap-4 max-w-md mx-auto md:mx-0">
+                
+                <!-- QR Code Card -->
+                <div class="bg-white rounded-2xl p-5 shadow-sm border border-[#e2e8f0]">
+                    <h3 class="text-base font-black text-slate-900 mb-0.5">Your QR Code</h3>
+                    <p class="text-xs font-semibold text-[#64748b] mb-6">Let customers scan to collect aurex coins</p>
+                    
+                    <div class="flex items-center space-x-5">
+                        <!-- QR Box -->
+                        <div class="w-[110px] h-[110px] bg-slate-50 rounded-xl flex items-center justify-center relative overflow-hidden border border-slate-200 shrink-0">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{ urlencode(url('/customer/claim-reward')) }}" alt="QR Code" class="w-full h-full object-contain mix-blend-multiply opacity-80" />
+                            <!-- Inner Red Icon (Gift) -->
+                            <div class="absolute inset-0 m-auto w-8 h-8 bg-[#b00000] rounded-md flex items-center justify-center shadow-md border-2 border-white">
+                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Buttons -->
+                        <div class="flex flex-col space-y-3 flex-1">
+                            <button class="w-full bg-[#b00000] hover:bg-[#8a0000] text-white font-bold py-2.5 rounded-xl transition flex justify-center items-center space-x-2 text-xs shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                <span>Download QR</span>
+                            </button>
+                            <button class="w-full bg-white hover:bg-slate-50 border border-[#fca5a5] text-[#b00000] font-bold py-2.5 rounded-xl transition flex justify-center items-center space-x-2 text-xs shadow-sm">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                                <span>Print QR</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pro Plan Banner -->
+                <div class="bg-[#fff8f6] rounded-2xl p-4 shadow-sm border border-[#ffedd5] flex items-center justify-between mb-8">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl drop-shadow-sm">👑</div>
+                        <div>
+                            <div class="text-[13px] font-black text-slate-900 leading-tight">You're on Pro Plan</div>
+                            <div class="text-[9px] font-semibold text-slate-500 mt-0.5">Plan valid until 20 Aug 2026</div>
+                        </div>
+                    </div>
+                    <div class="bg-white border border-[#fca5a5] text-[#b00000] text-[10px] font-bold px-2.5 py-1.5 rounded-lg flex items-center space-x-1 shadow-sm hover:bg-red-50 transition cursor-pointer">
+                        <span>₹999 / year</span>
+                        <svg class="w-3 h-3 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+@endsection
